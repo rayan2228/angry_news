@@ -19,62 +19,35 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="sn-img">
-                        <img src="{{ asset('frontend') }}/img/top-news-1.jpg" />
+                        <img src="{{ asset('uploads/post_thumbnail') }}/{{ $post_data['post_thumbnail'] }}" />
                     </div>
                     <div class="sn-content">
                         <a class="sn-title" href="">Lorem ipsum dolor sit amet</a>
                         <a class="sn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique dictum tincidunt.
-                            Nam rhoncus sem vitae orci blandit, quis fermentum justo laoreet. Fusce vestibulum orci vitae
-                            luctus tincidunt. Maecenas eros elit, scelerisque at justo eget, consectetur semper turpis.
-                            Proin pulvinar lorem eu sapien fermentum, sed finibus augue convallis. Aliquam ultrices porta
-                            gravida. Vestibulum nec libero sit amet enim consequat facilisis. Orci varius natoque penatibus
-                            et magnis dis parturient montes, nascetur ridiculus mus. Cras facilisis massa eget suscipit
-                            venenatis. Suspendisse et molestie diam. Vestibulum in massa dapibus, blandit nibh ut, feugiat
-                            leo.
-                        </p>
-                        <p>
-                            Nulla consectetur risus libero. Donec mattis tortor justo, ac egestas purus condimentum in.
-                            Etiam viverra nec metus quis egestas. Nulla commodo, lectus nec dictum malesuada, tortor tellus
-                            consequat nisi, sit amet dictum erat tellus in libero. In dignissim lectus quis elit posuere,
-                            sit amet tempor nisi iaculis. Curabitur eget ante in libero laoreet finibus nec et libero. In
-                            hac habitasse platea dictumst. Morbi tincidunt ex non odio auctor tristique. Nulla facilisi.
-                            Maecenas ullamcorper, felis eget interdum semper, mi ipsum auctor magna, ut ullamcorper leo
-                            metus vitae ex. Curabitur eu tempor elit. Phasellus blandit elit fringilla, ultricies ligula
-                            sed, pretium ligula. Duis condimentum elementum orci, pulvinar mattis elit luctus at. Vestibulum
-                            lacinia porttitor urna, eget aliquet justo porta sed. Cras pulvinar euismod consectetur.
-                            Vestibulum quis nisi non erat feugiat viverra.
-                        </p>
-                        <p>
-                            Aliquam eleifend pharetra nunc, et finibus felis tristique nec. Ut mattis nisi ante, vel varius
-                            ipsum consectetur sit amet. Donec sed eros at magna sollicitudin molestie. Cras quis malesuada
-                            felis. Maecenas sodales nunc sit amet lobortis iaculis. Etiam eget consectetur sem, et aliquet
-                            justo. Curabitur at viverra lacus, eget feugiat erat. Fusce lacinia faucibus diam ut vestibulum.
-                            Vestibulum nisi sem, lacinia ullamcorper iaculis a, finibus eget mauris. Vestibulum elementum
-                            quam quam, sit amet condimentum odio luctus at. Aenean dictum nec nisi vitae hendrerit. Nulla
-                            facilisi.
-                        </p>
-                        <div class="d-flex justify-content-between p-4">
+                        <div style="overflow-x: hidden">
+                            <?php echo $post_data['post_description']  ?>
+                        </div>
+                      
+                        <div class="p-4 d-flex justify-content-between">
                             <div class="d-flex align-items-center">
-                                <img class="rounded-circle mr-2" src="{{ asset('frontend/img') }}/user.jpg"width="25"
+                                <img class="mr-2 rounded-circle" src="{{ asset('frontend/img') }}/user.jpg"width="25"
                                     height="25" alt="">
                                 <span>John Doe</span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <span class="ml-3"><i class="far fa-eye mr-2"></i>12345</span>
-                                <span class="ml-3"><i class="far fa-comment mr-2"></i>123</span>
+                                <span class="ml-3"><i class="mr-2 far fa-eye"></i>12345</span>
+                                <span class="ml-3"><i class="mr-2 far fa-comment"></i>123</span>
                             </div>
                         </div>
                         <!-- Comment List Start -->
-                        <div class="mb-3 mt-4">
-                            <div class="section-title mb-0">
-                                <h4 class="text-uppercase font-weight-bold m-0">3 Comments</h4>
+                        <div class="mt-4 mb-3">
+                            <div class="mb-0 section-title">
+                                <h4 class="m-0 text-uppercase font-weight-bold">3 Comments</h4>
                             </div>
-                            <div class="border-top-0 border bg-white p-4">
-                                <div class="media mb-4">
+                            <div class="p-4 bg-white border border-top-0">
+                                <div class="mb-4 media">
                                     <img src="{{ asset('frontend/img') }}/user.jpg"alt="Image"
-                                        class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        class="mt-1 mr-3 img-fluid" style="width: 45px;">
                                     <div class="media-body">
                                         <h6><a class="text-secondary font-weight-bold" href="">John Doe</a>
                                             <small><i>01 Jan 2045</i></small></h6>
@@ -86,7 +59,7 @@
                                 </div>
                                 <div class="media">
                                     <img src="{{ asset('frontend/img') }}/user.jpg"alt="Image"
-                                        class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        class="mt-1 mr-3 img-fluid" style="width: 45px;">
                                     <div class="media-body">
                                         <h6><a class="text-secondary font-weight-bold" href="">John Doe</a>
                                             <small><i>01 Jan 2045</i></small></h6>
@@ -94,9 +67,9 @@
                                             accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod
                                             ipsum.</p>
                                         <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                                        <div class="media mt-4">
+                                        <div class="mt-4 media">
                                             <img src="{{ asset('frontend/img') }}/user.jpg" alt="Image"
-                                                class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                                class="mt-1 mr-3 img-fluid" style="width: 45px;">
                                             <div class="media-body">
                                                 <h6><a class="text-secondary font-weight-bold" href="">John Doe</a>
                                                     <small><i>01 Jan 2045</i></small></h6>
@@ -114,10 +87,10 @@
                         <!-- Comment List End -->
                         <!-- Comment Form Start -->
                         <div class="mb-3">
-                            <div class="section-title mb-0">
-                                <h4 class="text-uppercase font-weight-bold m-0">Leave a comment</h4>
+                            <div class="mb-0 section-title">
+                                <h4 class="m-0 text-uppercase font-weight-bold">Leave a comment</h4>
                             </div>
-                            <div class="border-top-0 border bg-white p-4">
+                            <div class="p-4 bg-white border border-top-0">
                                 <form>
                                     <div class="form-row">
                                         <div class="col-sm-6">
@@ -142,9 +115,9 @@
                                         <label for="message">Message </label>
                                         <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
                                     </div>
-                                    <div class="form-group mb-0">
+                                    <div class="mb-0 form-group">
                                         <input type="submit" value="Leave a comment"
-                                            class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                                            class="px-3 py-2 btn btn-primary font-weight-semi-bold">
                                     </div>
                                 </form>
                             </div>

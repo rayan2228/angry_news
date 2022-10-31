@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminProfile;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagsController;
 use Illuminate\Support\Facades\Route;
@@ -17,23 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // frontend routes 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-Route::get('/contact', function () {
-    return view('frontend.contact');
-})->name('contact');
-Route::get('/category', function () {
-    return view('frontend.category');
-})->name('category');
-Route::get('/post', function () {
-    return view('frontend.singlePost');
-})->name('post');
+Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::get('/category', [FrontendController::class, 'category'])->name('category');
+Route::get('/post', [FrontendController::class, 'post'])->name('post');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
@@ -41,15 +34,15 @@ Route::group(["prefix" => "admin", "middleware" => ["auth:admin"], "as" => "admi
     Route::get('/dashboard', function () {
         return view('backend.dashboard');
     })->name('dashboard');
-    Route::get('/subcategory/{subcategory}',[CategoryController::class , 'subEdit'])->name('subCategory.edit');
-    Route::put('/subcategory/{subcategory}',[CategoryController::class , 'subUpdate'])->name('subCategory.update');
-    Route::get('/subcategory/trash/{subcategory}',[CategoryController::class , 'subDelete'])->name('subCategory.trash');
-    Route::get('/subcategory/restore/{subcategory}',[CategoryController::class , 'subRestore'])->name('subCategory.restore');
-    Route::delete('/subcategory/{subcategory}',[CategoryController::class , 'subDestroy'])->name('subCategory.delete');
-    Route::get('/category/trash/{category}',[CategoryController::class , 'trash'])->name('category.trash');
-    Route::get('/category/restore/{category}',[CategoryController::class , 'restore'])->name('category.restore');
+    Route::get('/subcategory/{subcategory}', [CategoryController::class, 'subEdit'])->name('subCategory.edit');
+    Route::put('/subcategory/{subcategory}', [CategoryController::class, 'subUpdate'])->name('subCategory.update');
+    Route::get('/subcategory/trash/{subcategory}', [CategoryController::class, 'subDelete'])->name('subCategory.trash');
+    Route::get('/subcategory/restore/{subcategory}', [CategoryController::class, 'subRestore'])->name('subCategory.restore');
+    Route::delete('/subcategory/{subcategory}', [CategoryController::class, 'subDestroy'])->name('subCategory.delete');
+    Route::get('/category/trash/{category}', [CategoryController::class, 'trash'])->name('category.trash');
+    Route::get('/category/restore/{category}', [CategoryController::class, 'restore'])->name('category.restore');
     Route::resource('category', CategoryController::class);
-    Route::get('/profile' ,  [AdminProfile::class , 'index'])->name('profile.index');
+    Route::get('/profile',  [AdminProfile::class, 'index'])->name('profile.index');
     Route::post('/post/subcategorylist', [PostController::class, 'getSubCategory'])->name('subcategorylist');
     Route::resource('post', PostController::class);
     Route::resource('tags', TagsController::class);

@@ -30,7 +30,7 @@
     <!--end breadcrumb-->
     <div class="card">
         <div class="py-3 card-header">
-            <h6 class="mb-0">Add Product Category</h6>
+            <h6 class="mb-0">Create Post</h6>
         </div>
         <div class="card-body">
             <div class="row">
@@ -42,14 +42,14 @@
                             <div class="card-body">
                                 <div class="mb-2 col-12">
                                     <label class="form-label">Post Heading</label>
-                                    <input type="text" class="form-control" name="post_heading">
+                                    <input type="text" class="form-control" name="post_heading" value="{{ old('post_heading') }}">
                                     @error('post_heading')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="mb-2 col-12">
                                     <label class="form-label">Post Slug</label>
-                                    <input type="text" class="form-control" name="post_slug">
+                                    <input type="text" class="form-control" name="post_slug" value="{{ old('post_slug') }}">
                                 </div>
                                 <div class="row">
                                     <div class="mb-2 col-6">
@@ -121,7 +121,7 @@
 
                                 <div class="mb-2 col-12">
                                     <label class="form-label">Post Description</label>
-                                    <textarea class="form-control" name="post_description" id="summernote"></textarea>
+                                    <textarea class="form-control" name="post_description" id="summernote">{{ old('post_description') }}</textarea>
                                     @error('post_description')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
