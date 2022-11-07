@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -13,6 +14,21 @@ class AdminProfile extends Controller
     public function index()
     {
         return view('backend.profile.profileSettings');
+    }
+    public function updatepassowrd(Request $request, $profile_id)
+    {
+        $request->validate([
+            '*' => 'required',
+            "new_password" => "min:8|different:current_password|same:password_confirmation",
+        ]);
+        if (Hash::check($request->current_password,auth()->guard('admin')->user()->password)) {
+            Admin::find($profile_id)->update([
+                "password"=>bcrypt($request->new_password)
+            ]);
+        }else {
+            return back()->with('error','current password doesn\'t match');
+        }
+        return back()->with('success', 'password changed');
     }
     public function update(Request $request, $profile_id)
     {

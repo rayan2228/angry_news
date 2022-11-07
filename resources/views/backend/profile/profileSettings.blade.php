@@ -29,7 +29,9 @@
     </div>
     <!--end breadcrumb-->
 
-    <div class="profile-cover bg-dark" style="background: url({{ asset('uploads/cover_pics') }}/{{ auth()->guard('admin')->user()->cover_pic }});background-size:cover;"></div>
+    <div class="profile-cover bg-dark"
+        style="background: url({{ asset('uploads/cover_pics') }}/{{ auth()->guard('admin')->user()->cover_pic }});background-size:cover;">
+    </div>
 
     <div class="row">
         <div class="col-12 col-lg-8">
@@ -160,6 +162,53 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <form class="row g-3"
+                action='{{ route('admin.profile.updatepassowrd', ['profile_id' => auth()->guard('admin')->id()]) }}'
+                method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="border shadow-none card">
+                    <div class="card-header">
+                        <h6 class="mb-0">Change Your Passowrd</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-2 row">
+                            <div class="col-12">
+                                <label class="form-label">Cureent Password</label>
+                                <input type="password" class="form-control" name="current_password">
+                                @if (session('error'))
+                                    <p class="text-danger">{{ session('error') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="mt-2 row">
+                            <div class="col-12">
+                                <label class="form-label">New Password</label>
+                                <input type="password" class="form-control" name="new_password">
+                                @error('new_password')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="mt-2 row">
+                            <div class="col-12">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" name="password_confirmation">
+                                @error('password_confirmation')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="mt-4 text-start">
+                            <button type="submit" class="px-4 btn btn-primary">Change Passowrd</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
     <!--end row-->
 @section('footer_script')
     @if (session('update'))
@@ -180,6 +229,27 @@
                 Toast.fire({
                     icon: 'success',
                     title: "{{ session('update') }}"
+                })
+            });
+        </script>
+        @elseif (session('success'))
+         <script>
+            $(document).ready(function() {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: "{{ session('success') }}"
                 })
             });
         </script>

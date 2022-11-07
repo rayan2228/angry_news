@@ -44,6 +44,7 @@ Route::group(["prefix" => "admin", "middleware" => ["auth:admin"], "as" => "admi
     Route::resource('category', CategoryController::class);
     Route::get('/profile',  [AdminProfile::class, 'index'])->name('profile.index');
     Route::post('/profile/update/{profile_id}',  [AdminProfile::class, 'update'])->name('profile.update');
+    Route::post('/profile/updatepassowrd/{profile_id}',  [AdminProfile::class, 'updatepassowrd'])->name('profile.updatepassowrd');
     Route::post('/post/subcategorylist', [PostController::class, 'getSubCategory'])->name('subcategorylist');
     Route::get('/post/trash/{post}', [PostController::class, 'trash'])->name('post.trash');
     Route::get('/post/restore/{post}', [PostController::class, 'restore'])->name('post.restore');
