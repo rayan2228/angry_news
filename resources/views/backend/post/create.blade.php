@@ -42,22 +42,27 @@
                             <div class="card-body">
                                 <div class="mb-2 col-12">
                                     <label class="form-label">Post Heading</label>
-                                    <input type="text" class="form-control" name="post_heading" value="{{ old('post_heading') }}">
+                                    <input type="text" class="form-control" name="post_heading"
+                                        value="{{ old('post_heading') }}">
                                     @error('post_heading')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="mb-2 col-12">
                                     <label class="form-label">Post Slug</label>
-                                    <input type="text" class="form-control" name="post_slug" value="{{ old('post_slug') }}">
+                                    <input type="text" class="form-control" name="post_slug"
+                                        value="{{ old('post_slug') }}">
+                                    @error('post_slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="row">
                                     <div class="mb-2 col-6">
                                         <label class="form-label">Post Thumnail</label>
                                         <input type="file" class="form-control" name="post_thumbnail">
-                                         @error('post_thumbnail')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
+                                        @error('post_thumbnail')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="mb-2 col-6">
                                         <label class="form-label">Post Featued</label>
@@ -211,48 +216,7 @@
                 })
             });
         </script>
-    @elseif (session('delete'))
-        <script>
-            $(document).ready(function() {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: "{{ session('delete') }}"
-                })
-            });
-        </script>
-    @elseif (session('update'))
-        <script>
-            $(document).ready(function() {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: "{{ session('update') }}"
-                })
-            });
-        </script>
+       
     @elseif (session('restore'))
         <script>
             $(document).ready(function() {

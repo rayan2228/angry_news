@@ -2,13 +2,13 @@
 @section('content')
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center">
-        <div class="breadcrumb-title pe-3 text-white">Pages</div>
+        <div class="text-white breadcrumb-title pe-3">Pages</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt text-white"></i></a>
+                <ol class="p-0 mb-0 breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="text-white bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active text-white" aria-current="page">User Profile</li>
+                    <li class="text-white breadcrumb-item active" aria-current="page">User Profile</li>
                 </ol>
             </nav>
         </div>
@@ -29,88 +29,124 @@
     </div>
     <!--end breadcrumb-->
 
-    <div class="profile-cover bg-dark"></div>
+    <div class="profile-cover bg-dark" style="background: url({{ asset('uploads/cover_pics') }}/{{ auth()->guard('admin')->user()->cover_pic }});background-size:cover;"></div>
 
     <div class="row">
         <div class="col-12 col-lg-8">
-            <div class="card border-0 shadow-sm">
+            <div class="border-0 shadow-sm card">
                 <div class="card-body">
                     <h5 class="mb-0">My Account</h5>
                     <hr>
-                    <div class="card border shadow-none">
-                        <div class="card-header">
-                            <h6 class="mb-0">USER INFORMATION</h6>
+                    <form class="row g-3"
+                        action='{{ route('admin.profile.update', ['profile_id' => auth()->guard('admin')->id()]) }}'
+                        method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="border shadow-none card">
+                            <div class="card-header">
+                                <h6 class="mb-0">USER INFORMATION</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control" name="name"
+                                            value="{{ auth()->guard('admin')->user()->name }}">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Email address</label>
+                                        <input type="text" class="form-control"
+                                            {{ auth()->guard('admin')->user()->email? 'readonly': '' }}
+                                            value="{{ auth()->guard('admin')->user()->email }}">
+                                    </div>
+                                </div>
+                                <div class="mt-2 row">
+                                    <div class="col-6">
+                                        <label class="form-label">Profile Picture</label>
+                                        <input type="file" class="form-control" name="profile_pic">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Cover Photo</label>
+                                        <input type="file" class="form-control" name="cover_pic">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <form class="row g-3">
-                                <div class="col-6">
-                                    <label class="form-label">Email address</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ auth()->guard('admin')->user()->email }}">
+                        <div class="border shadow-none card">
+                            <div class="card-header">
+                                <h6 class="mb-0">CONTACT INFORMATION</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mt-2 row">
+                                    <div class="col-6">
+                                        <label class="form-label">Address</label>
+                                        <input type="text" class="form-control" name="address"
+                                            value="{{ auth()->guard('admin')->user()->address }}">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="text" class="form-control" name="phone_number"
+                                            value="{{ auth()->guard('admin')->user()->phone_number }}">
+
+
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ auth()->guard('admin')->user()->name }}">
+                                <div class="mt-2 row">
+                                    <div class="col-6">
+                                        <label class="form-label">City</label>
+                                        <input type="text" class="form-control" name="city"
+                                            value="{{ auth()->guard('admin')->user()->city }}">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Country</label>
+                                        <input type="text" class="form-control" name="country"
+                                            value="{{ auth()->guard('admin')->user()->country }}">
+                                    </div>
                                 </div>
-                            </form>
+                                <div class="mt-2 row">
+                                    <div class="col-12">
+                                        <label class="form-label">About Me</label>
+                                        <textarea class="form-control" name="about_me" rows="4" cols="4" placeholder="Describe yourself...">{{ auth()->guard('admin')->user()->about_me }}</textarea>
+                                        @error('about_me')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card border shadow-none">
-                        <div class="card-header">
-                            <h6 class="mb-0">CONTACT INFORMATION</h6>
+                        <div class="text-start">
+                            <button type="submit" class="px-4 btn btn-primary">Save Changes</button>
                         </div>
-                        <div class="card-body">
-                            <form class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label">Address</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ auth()->guard('admin')->user()->address }}">
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label">City</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ auth()->guard('admin')->user()->city }}">
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label">Country</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ auth()->guard('admin')->user()->country }}">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">About Me</label>
-                                    <textarea class="form-control" rows="4" cols="4" placeholder="Describe yourself...">{{ auth()->guard('admin')->user()->about_me }}</textarea>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="text-start">
-                        <button type="button" class="btn btn-primary px-4">Save Changes</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
         <div class="col-12 col-lg-4">
-            <div class="card overflow-hidden border-0 shadow-sm">
+            <div class="overflow-hidden border-0 shadow-sm card">
                 <div class="card-body">
-                    <div class="profile-avatar  text-center">
-                        <img src="{{ asset('backend') }}/assets/images/avatars/avatar-1.png" class="rounded-circle shadow"
-                            width="120" height="120" alt="">
-            
-                    </div> 
-                    <div class="d-flex align-items-center justify-content-around mt-5 gap-3">
+                    <div class="text-center profile-avatar">
+                        @if (auth()->guard('admin')->user()->profile_pic === null)
+                            <img src="{{ asset('backend/assets/images/avatars') }}/avatar-1.png"
+                                class="shadow rounded-circle" width="120" height="120" alt="">
+                        @else
+                            <img src="{{ asset('uploads/profile_pics') }}/{{ auth()->guard('admin')->user()->profile_pic }}"
+                                class="shadow rounded-circle" width="120" height="120" alt="">
+                        @endif
+
+                    </div>
+                    <div class="gap-3 mt-5 d-flex align-items-center justify-content-around">
                         <div class="text-center">
                             <h4 class="mb-0">15</h4>
-                            <p class="text-secondary mb-0">Posts</p>
+                            <p class="mb-0 text-secondary">Posts</p>
                         </div>
                         <div class="text-center">
                             <h4 class="mb-0">86</h4>
-                            <p class="text-secondary mb-0">Comments</p>
+                            <p class="mb-0 text-secondary">Comments</p>
                         </div>
                     </div>
                     <div class="mt-4 text-center">
                         <h4 class="mb-1">{{ auth()->guard('admin')->user()->name }}</h4>
-                        <p class="text-secondary mb-0">{{ auth()->guard('admin')->user()->role }}</p>
+                        <p class="mb-0 text-secondary">{{ auth()->guard('admin')->user()->role }}</p>
                         <div class="mt-4"></div>
                         <h6 class="mb-1">{{ auth()->guard('admin')->user()->email }}</h6>
                     </div>
@@ -125,4 +161,28 @@
         </div>
     </div>
     <!--end row-->
+@section('footer_script')
+    @if (session('update'))
+        <script>
+            $(document).ready(function() {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: "{{ session('update') }}"
+                })
+            });
+        </script>
+    @endif
+@endsection
 @endsection

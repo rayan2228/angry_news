@@ -14,11 +14,11 @@ class Category extends Model
     // sub category
     public function relationSubCategory()
     {
-        return $this->hasMany(SubCategory::class, 'category_id', 'id');
+        return $this->hasMany(SubCategory::class, 'category_id', 'id')->withTrashed();
     }
     // posts
     public function relationPosts()
     {
-        return $this->hasMany(Post::class,  'parent_category_id', 'id');
+        return $this->hasMany(Post::class,  'parent_category_id', 'id')->withTrashed();
     }
 }

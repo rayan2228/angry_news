@@ -17,12 +17,12 @@ class SubCategory extends Model
      */
     public function relationCategory()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'category_id', 'id')->withTrashed();
     }
     // posts
     public function relationPosts()
     {
-        return $this->belongsToMany(Post::class, 'subcategory_post', 'subcategory_id', 'post_id')->withTimestamps();
+        return $this->belongsToMany(Post::class, 'subcategory_post', 'subcategory_id', 'post_id')->withTimestamps()->withTrashed();
     }
 
 }

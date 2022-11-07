@@ -39,6 +39,7 @@
                         <form class="row g-4" method="POST"
                             action="{{ route('admin.post.update', ['post' => $post->id]) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="col-12 mb-2">
                                     <label class="form-label">Post Heading</label>
@@ -52,6 +53,9 @@
                                     <label class="form-label">Post Slug</label>
                                     <input type="text" class="form-control" name="post_slug"
                                         value="{{ $post->post_slug }}">
+                                    @error('post_slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="row">
                                     <div class="col-6 mb-2">
@@ -92,6 +96,10 @@
                                         <label class="form-label">Select Sub Category</label>
                                         <select class="select_js form-select" name="subCategory_id[]" id="sub_category"
                                             multiple="multiple">
+                                            @foreach ($subCategory as $item)
+                                                <option value="{{ $item->id }}" selected>{{ $item->subCategory_name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -111,27 +119,28 @@
                                         <label class="form-label">Select Tags</label>
                                         <select class="select_js form-select" name="tag_id[]" multiple="multiple">
                                             @foreach ($tags as $tag)
-                                                @foreach ($post->relationTags as $item)
-                                                    <option value="{{ $tag->id }}" @if ($item->pivot->tag_id  === $tag->id) selected @endif>{{ $tag->tags_name }}
-                                                    </option>
-                                                @endforeach
+                                                <option value="{{ $tag->id }}"
+                                                    @foreach ($post->relationTags as $item)
+                                                @if ($item->pivot->tag_id === $tag->id) selected @endif @endforeach>
+                                                    {{ $tag->tags_name }}
+                                                </option>
                                             @endforeach
                                         </select>
-
-                                        {{-- {{ print_r($post->relationTags->first()) }} --}}
                                     </div>
                                     <div class="col-6 mb-2">
                                         <label class="form-label">Post Status</label>
                                         <select class="form-select" name="post_status">
-                                            <option value="active" @if ($post->post_status === 'active') selected @endif>active</option>
-                                            <option value="deactive" @if ($post->post_status === 'deactive') selected @endif>deactive</option>
+                                            <option value="active" @if ($post->post_status === 'active') selected @endif>active
+                                            </option>
+                                            <option value="deactive" @if ($post->post_status === 'deactive') selected @endif>
+                                                deactive</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col-12 mb-2">
                                     <label class="form-label">Post Description</label>
-                                    <textarea class="form-control" name="post_description" id="summernote">{{ $post->post_description}}</textarea>
+                                    <textarea class="form-control" name="post_description" id="summernote">{{ $post->post_description }}</textarea>
                                     @error('post_description')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -148,5 +157,55 @@
         </div>
         <!--end row-->
     </div>
-    </div>
+@section('footer_script')
+    <script>
+        $(document).ready(function() {
+            // category ajax
+            $('#parent_category').change(function() {
+                var category_id = $(this).val();
+                if (category_id) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: '/admin/post/subcategorylist',
+                        data: {
+                            category_id: category_id,
+                        },
+                        success: function(data) {
+                            $("#sub_category").empty();
+                            $("#sub_category").html(data);
+                            // alert(data)
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: "{{ session('update') }}"
+                })
+            });
+        </script>
+    @endif
+@endsection
 @endsection

@@ -45,7 +45,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             "category_name" => "required | unique:categories,category_name",
-            "category_slug" => "required | unique:categories,category_slug",
+            "category_slug" => "unique:categories,category_slug",
         ]);
         if ($request->category_slug) {
             $salt = "_".Str::random(8);
