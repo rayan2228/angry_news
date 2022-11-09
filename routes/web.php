@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddUserController;
 use App\Http\Controllers\AdminProfile;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
@@ -24,9 +25,9 @@ Route::get('/category', [FrontendController::class, 'category'])->name('category
 Route::get('/post', [FrontendController::class, 'post'])->name('post');
 
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
@@ -50,5 +51,6 @@ Route::group(["prefix" => "admin", "middleware" => ["auth:admin"], "as" => "admi
     Route::get('/post/restore/{post}', [PostController::class, 'restore'])->name('post.restore');
     Route::resource('post', PostController::class);
     Route::resource('tags', TagsController::class);
+    Route::resource('user', AddUserController::class);
 });
 require __DIR__ . '/backend_auth.php';

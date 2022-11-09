@@ -465,7 +465,6 @@
                         </li>
                     </ul>
                 </li>
-                <li class="menu-label">Category</li>
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-droplet-fill"></i>
@@ -479,7 +478,6 @@
                         </li>
                     </ul>
                 </li>
-                <li class="menu-label">Post</li>
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-droplet-fill"></i>
@@ -497,6 +495,22 @@
                     </ul>
                     <ul>
                         <li> <a href="{{ route('admin.tags.create') }}"><i class="bi bi-circle"></i>Add Tags</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class="bi bi-droplet-fill"></i>
+                        </div>
+                        <div class="menu-title">Users</div>
+
+                    </a>
+                    <ul>
+                        <li> <a href="{{ route('admin.user.create') }}"><i class="bi bi-circle"></i>Create User</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li> <a href="{{ route('admin.user.index') }}"><i class="bi bi-circle"></i>User List</a>
                         </li>
                     </ul>
                 </li>

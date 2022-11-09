@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AddUserController extends Controller
@@ -13,7 +15,8 @@ class AddUserController extends Controller
      */
     public function index()
     {
-        //
+        $users = Admin::where('id','!=',auth()->guard('admin')->user()->id)->get();
+        return view('backend.user.index', compact('users'));
     }
 
     /**
@@ -23,7 +26,7 @@ class AddUserController extends Controller
      */
     public function create()
     {
-         
+         return view('backend.user.create');
     }
 
     /**
@@ -34,7 +37,20 @@ class AddUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate([
+            '*'=>'required',
+            'email' => 'email',
+            'password'=> 'min:8',
+         ]);
+         Admin::insert([
+            "name"=>$request->name,
+            "email"=>$request->email,
+            "password"=>bcrypt($request->password),
+            "role"=>$request->role,
+            "email_verified_at"  => now(),
+            "created_at"=> now(),
+         ]);
+         return back()->with('success','user created');
     }
 
     /**
@@ -79,6 +95,7 @@ class AddUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Admin::find($id)->delete();
+        return back()->with('delete','user deleted');
     }
 }
