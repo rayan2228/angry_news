@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 @section('content')
     <!--breadcrumb-->
-    <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">User</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
-                <ol class="p-0 mb-0 breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">User List</li>
@@ -28,13 +28,13 @@
         </div>
     </div>
     <div class="card">
-        <div class="py-3 card-header">
+        <div class="card-header py-3">
             <h6 class="mb-0">User Lists</h6>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-lg-12 d-flex">
-                    <div class="border shadow-none card w-100">
+                    <div class="card w-100 border shadow-none">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table align-middle">
@@ -55,7 +55,8 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->name }}
+                                                    <a
+                                                        href="{{ route('admin.user.show', ['user' => $user->id]) }}">{{ $user->name }}</a>
                                                 </td>
                                                 <td>
                                                     {{ $user->email }}
@@ -66,16 +67,22 @@
                                                         @elseif ($user->role === 'writer')
                                                          bg-primary
                                                          @else
-                                                         bg-secondary @endif">{{ $user->role }}</span>
+                                                         bg-secondary @endif">{{ $user->role }}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <div class="form-check-danger form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="flexSwitchCheckCheckedDanger" checked="@if ($user->status === 'active') checked @endif">
+                                                        <form action="{{ route('admin.user.update', ['user' => $user->id]) }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input onchange="this.form.submit()" class="form-check-input" type="checkbox"
+                                                                id="flexSwitchCheckCheckedDanger"
+                                                                @if ($user->status === 'active') checked @endif >
+                                                        </form>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="gap-3 d-flex align-items-center fs-6">
+                                                    <div class="d-flex align-items-center fs-6 gap-3">
                                                         <form
                                                             action="{{ route('admin.user.destroy', ['user' => $user->id]) }}"
                                                             method="post" id="delete">
@@ -93,7 +100,7 @@
                                         @empty
                                             <tr>
                                                 <td colspan="5">
-                                                    <p class="text-center text-danger">no posts to show</p>
+                                                    <p class="text-danger text-center">no posts to show</p>
                                                 </td>
                                             </tr>
                                         @endforelse

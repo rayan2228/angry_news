@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserActive;
+use App\Mail\UserCreated;
+use App\Mail\UserInactive;
 use App\Models\Admin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AddUserController extends Controller
 {
@@ -50,6 +54,7 @@ class AddUserController extends Controller
             "email_verified_at"  => now(),
             "created_at"=> now(),
          ]);
+         Mail::to($request->email)->send(new UserCreated($request->name,$request->email,$request->role,$request->password));
          return back()->with('success','user created');
     }
 
@@ -61,7 +66,9 @@ class AddUserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_info = Admin::find($id);
+        // return $user_info;
+        return view('backend.user.show', compact('user_info'));
     }
 
     /**
@@ -84,7 +91,19 @@ class AddUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $user_info = Admin::find($id);
+        $user_email = Admin::find($id)->email;
+        $user_name = Admin::find($id)->name;
+        if ($user_info->status === 'active') {
+            $user_info->status = 'inactive';
+            Mail::to($user_email)->send(new UserInactive($user_name));
+        }else{
+            $user_info->status = 'active';
+            Mail::to($user_email)->send(new UserActive($user_name));
+        }
+        $user_info->save();
+        return back()->with('delete','user deactivated');
     }
 
     /**

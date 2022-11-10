@@ -33,7 +33,7 @@
             <h6 class="mb-0">Create User</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.users.store') }}" method="post">
+            <form action="{{ route('admin.user.store') }}" method="post">
                 @csrf
                 <div class="row g-3">
                     <div class="col-12">
