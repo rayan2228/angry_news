@@ -79,7 +79,7 @@ class PostController extends Controller
         $post_thumbnail_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('post_thumbnail')->getClientOriginalExtension();
         Image::make($request->file('post_thumbnail'))->resize(900, 600)->save(base_path('public/uploads/post_thumbnail/' . $post_thumbnail_name), 80);
 
-
+        // summernote
         $post_description = $request->post_description;
         libxml_use_internal_errors(true);
         $dom = new \DomDocument();

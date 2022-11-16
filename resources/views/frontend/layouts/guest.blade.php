@@ -1,230 +1,440 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
+
+
 
 <head>
     <meta charset="utf-8">
-    <title>News 24</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Bootstrap Ecommerce Template" name="keywords">
-    <meta content="Bootstrap Ecommerce Template Free Download" name="description">
-
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home Default || Blogar - Personal Blog Template</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link href="" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend') }}/assets/images/favicon.png">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+    <!-- CSS
+    ============================================ -->
 
-    <!-- CSS Libraries -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="{{ asset('frontend') }}/lib/slick/slick.css" rel="stylesheet">
-    <link href="{{ asset('frontend') }}/lib/slick/slick-theme.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    {{-- <link href="{{ asset('frontend') }}/css/style.css" rel="stylesheet"> --}}
-    @vite(['public/frontend/css/style.css'])
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/vendor/font-awesome.css">
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/vendor/slick.css">
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/vendor/slick-theme.css">
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/vendor/base.css">
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/plugins/plugins.css">
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/style.css">
 
 </head>
 
 <body>
-    <!-- Top Header Start -->
-    <div class="top-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-4">
+    <div class="main-wrapper">
+        <div class="mouse-cursor cursor-outer"></div>
+        <div class="mouse-cursor cursor-inner"></div>
+
+        <div id="my_switcher" class="my_switcher">
+            <ul>
+                <li>
+                    <a href="javascript: void(0);" data-theme="light" class="setColor light">
+                        <span title="Light Mode">Light</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" data-theme="dark" class="setColor dark">
+                        <span title="Dark Mode">Dark</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Start Header -->
+        <header class="header axil-header header-light header-sticky">
+            <div class="header-wrap">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-3 col-12">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img class="dark-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-black.png" alt="Blogar logo">
+                                <img class="light-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png" alt="Blogar logo">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 d-none d-xl-block">
+                        <div class="mainmenu-wrapper">
+                            <nav class="mainmenu-nav">
+                                <!-- Start Mainmanu Nav -->
+                                <ul class="mainmenu">
+                                    <li class="menu-item-has-children"><a href="{{ route('index') }}">Home</a>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="">Posts</a>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="{{ route('authors') }}">Writers</a>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="{{ route('about') }}">About</a>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="{{ route('contact') }}">Contact</a>
+                                    </li>
+                                </ul>
+                                <!-- End Mainmanu Nav -->
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-8 col-md-8 col-sm-9 col-12">
+                        <div class="header-search d-flex align-items-center text-end">
+                            <form class="header-search-form d-sm-block d-none">
+                                <div class="axil-search form-group">
+                                    <button type="submit" class="search-button"><i class="fal fa-search"></i></button>
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                            </form>
+                            <div class="mobile-search-wrapper d-sm-none d-block">
+                                <button class="search-button-toggle"><i class="fal fa-search"></i></button>
+                                <form class="header-search-form">
+                                    <div class="axil-search form-group">
+                                        <button type="submit" class="search-button"><i
+                                                class="fal fa-search"></i></button>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </form>
+                            </div>
+                            <ul class="metabar-block">
+                                <li class="icon"><a href="#"><i class="fas fa-bookmark"></i></a></li>
+                                <li class="icon"><a href="#"><i class="fas fa-bell"></i></a></li>
+                                <li><a href="#"><img src="{{ asset('frontend') }}/assets/images/others/author.png"
+                                            alt="Author Images"></a></li>
+                            </ul>
+                            <!-- Start Hamburger Menu  -->
+                            <div class="hamburger-menu d-block d-xl-none">
+                                <div class="hamburger-inner">
+                                    <div class="icon"><i class="fal fa-bars"></i></div>
+                                </div>
+                            </div>
+                            <!-- End Hamburger Menu  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Start Header -->
+
+        <!-- Start Mobile Menu Area  -->
+        <div class="popup-mobilemenu-area">
+            <div class="inner">
+                <div class="mobile-menu-top">
                     <div class="logo">
-                        <a href="">
-                            <img src="{{ asset('frontend') }}/img/logo.png" alt="Logo">
+                        <a href="index.html">
+                            <img class="dark-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-black.png" alt="Logo Images">
+                            <img class="light-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png" alt="Logo Images">
                         </a>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-4">
-                    <div class="search">
-                        <input type="text" placeholder="Search">
-                        <button><i class="fa fa-search"></i></button>
+                    <div class="mobile-close">
+                        <div class="icon">
+                            <i class="fal fa-times"></i>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="social">
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-facebook"></i></a>
-                        <a href=""><i class="fab fa-linkedin"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
+                <ul class="mainmenu">
+                    <li class="menu-item-has-children"><a href="index.html">Home</a>
+                    </li>
+                    <li class="menu-item-has-children"><a href="post-details.html">Posts</a>
+                    </li>
+                    <li class="menu-item-has-children"><a href="author.html">Writers</a>
+                    </li>
+                    <li class="menu-item-has-children"><a href="about.html">About</a>
+                    </li>
+                    <li class="menu-item-has-children"><a href="contact.html">Contact</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-    <!-- Top Header End -->
-
-
-    <!-- Header Start -->
-    <div class="header">
-        <div class="container">
-            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a href="#" class="navbar-brand">MENU</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav m-auto">
-                        <a href="{{ route('index') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ route('category') }}" class="nav-item nav-link">Sports</a>
-                        <a href="#" class="nav-item nav-link">Tech</a>
-                        <a href="#" class="nav-item nav-link">Fashion</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Sub Item 1</a>
-                                <a href="#" class="dropdown-item">Sub Item 2</a>
-                            </div>
+        <!-- End Mobile Menu Area  -->        
+        <!-- Start content Area  -->
+        @yield('content')
+        <!-- End content Area  -->
+        <!-- Start Instagram Area  -->
+        <div class="axil-instagram-area axil-section-gap bg-color-grey">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2 class="title">Instagram</h2>
                         </div>
-                        <a href="{{ route('contact') }}" class="nav-item nav-link">Contact Us</a>
-                        <a href="{{ route('admin.login') }}" class="nav-item nav-link">Contact Us</a>
                     </div>
                 </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Header End -->
-    @yield('content')
-    <!-- Footer Start -->
-    <div class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Useful Links</h3>
-                        <ul>
-                            <li><a href="#">Pellentesque</a></li>
-                            <li><a href="#">Aliquam</a></li>
-                            <li><a href="#">Fusce placerat</a></li>
-                            <li><a href="#">Nulla hendrerit</a></li>
-                            <li><a href="#">Maecenas</a></li>
+                <div class="row mt--30">
+                    <div class="col-lg-12">
+                        <ul class="instagram-post-list">
+                            <li class="single-post">
+                                <a href="#">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-01.jpg" alt="Instagram Images">
+                                    <span class="instagram-button"><i class="fab fa-instagram"></i></span>
+                                </a>
+                            </li>
+                            <li class="single-post">
+                                <a href="#">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-02.jpg" alt="Instagram Images">
+                                    <span class="instagram-button"><i class="fab fa-instagram"></i></span>
+                                </a>
+                            </li>
+                            <li class="single-post">
+                                <a href="#">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-03.jpg" alt="Instagram Images">
+                                    <span class="instagram-button"><i class="fab fa-instagram"></i></span>
+                                </a>
+                            </li>
+                            <li class="single-post">
+                                <a href="#">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-04.jpg" alt="Instagram Images">
+                                    <span class="instagram-button"><i class="fab fa-instagram"></i></span>
+                                </a>
+                            </li>
+                            <li class="single-post">
+                                <a href="#">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-05.jpg" alt="Instagram Images">
+                                    <span class="instagram-button"><i class="fab fa-instagram"></i></span>
+                                </a>
+                            </li>
+                            <li class="single-post">
+                                <a href="#">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-06.jpg" alt="Instagram Images">
+                                    <span class="instagram-button"><i class="fab fa-instagram"></i></span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+        <!-- End Instagram Area  -->
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Quick Links</h3>
-                        <ul>
-                            <li><a href="#">Posuere egestas</a></li>
-                            <li><a href="#">Sollicitudin</a></li>
-                            <li><a href="#">Luctus non</a></li>
-                            <li><a href="#">Duis tincidunt</a></li>
-                            <li><a href="#">Elementum</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Get in Touch</h3>
-                        <div class="contact-info">
-                            <p><i class="fa fa-map-marker"></i>123 Terry Lane, New York, USA</p>
-                            <p><i class="fa fa-envelope"></i>email@example.com</p>
-                            <p><i class="fa fa-phone"></i>+123-456-7890</p>
-                            <div class="social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook"></i></a>
-                                <a href=""><i class="fab fa-linkedin"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
+        <!-- Start Footer Area  -->
+        <div class="axil-footer-area axil-footer-style-1 footer-variation-2">
+            <div class="footer-mainmenu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                            <div class="footer-widget">
+                                <h2 class="title">World</h2>
+                                <div class="inner">
+                                    <ul class="ft-menu-list">
+                                        <li><a href="#">U.N.</a></li>
+                                        <li><a href="#">Conflicts</a></li>
+                                        <li><a href="#">Terrorism</a></li>
+                                        <li><a href="#">Disasters</a></li>
+                                        <li><a href="#">Global Economy</a></li>
+                                        <li><a href="#">Environment</a></li>
+                                        <li><a href="#">Religion</a></li>
+                                        <li><a href="#">Scandals</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                            <div class="footer-widget">
+                                <h2 class="title">Politics</h2>
+                                <div class="inner">
+                                    <ul class="ft-menu-list">
+                                        <li><a href="#">Executive</a></li>
+                                        <li><a href="#">Senate</a></li>
+                                        <li><a href="#">House</a></li>
+                                        <li><a href="#">Judiciary</a></li>
+                                        <li><a href="#">Global Economy</a></li>
+                                        <li><a href="#">Foreign policy</a></li>
+                                        <li><a href="#">Polls</a></li>
+                                        <li><a href="#">Elections</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                            <div class="footer-widget">
+                                <h2 class="title">Entertainment</h2>
+                                <div class="inner">
+                                    <ul class="ft-menu-list">
+                                        <li><a href="#">Celebrity News</a></li>
+                                        <li><a href="#">Movies</a></li>
+                                        <li><a href="#">TV News</a></li>
+                                        <li><a href="#">Disasters</a></li>
+                                        <li><a href="#">Music News</a></li>
+                                        <li><a href="#">Environment</a></li>
+                                        <li><a href="#">Style News</a></li>
+                                        <li><a href="#">Entertainment Video</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                            <div class="footer-widget">
+                                <h2 class="title">Business</h2>
+                                <div class="inner">
+                                    <ul class="ft-menu-list">
+                                        <li><a href="#">Environment</a></li>
+                                        <li><a href="#">Conflicts</a></li>
+                                        <li><a href="#">Terrorism</a></li>
+                                        <li><a href="#">Disasters</a></li>
+                                        <li><a href="#">Global Economy</a></li>
+                                        <li><a href="#">Environment</a></li>
+                                        <li><a href="#">Religion</a></li>
+                                        <li><a href="#">Scandals</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                            <div class="footer-widget">
+                                <h2 class="title">Health</h2>
+                                <div class="inner">
+                                    <ul class="ft-menu-list">
+                                        <li><a href="#">Movies</a></li>
+                                        <li><a href="#">Conflicts</a></li>
+                                        <li><a href="#">Terrorism</a></li>
+                                        <li><a href="#">Disasters</a></li>
+                                        <li><a href="#">Global Economy</a></li>
+                                        <li><a href="#">Environment</a></li>
+                                        <li><a href="#">Religion</a></li>
+                                        <li><a href="#">Scandals</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                            <div class="footer-widget">
+                                <h2 class="title">About</h2>
+                                <div class="inner">
+                                    <ul class="ft-menu-list">
+                                        <li><a href="#">U.N.</a></li>
+                                        <li><a href="#">Conflicts</a></li>
+                                        <li><a href="#">Terrorism</a></li>
+                                        <li><a href="#">Disasters</a></li>
+                                        <li><a href="#">Global Economy</a></li>
+                                        <li><a href="#">Environment</a></li>
+                                        <li><a href="#">Religion</a></li>
+                                        <li><a href="#">Scandals</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Newsletter</h3>
-                        <div class="newsletter">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui. Class
-                                aptent taciti sociosqu ad litora torquent per conubia nostra inceptos
-                            </p>
-                            <form>
-                                <input class="form-control" type="email" placeholder="Your email here">
-                                <button class="btn">Submit</button>
-                            </form>
+            <!-- Start Footer Top Area  -->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-4">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img class="dark-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-black.png" alt="Logo Images">
+                                    <img class="white-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png"
+                                        alt="Logo Images">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 col-md-8">
+                            <!-- Start Post List  -->
+                            <div
+                                class="flex-wrap d-flex justify-content-start mt_sm--15 justify-content-md-end align-items-center">
+                                <h5 class="follow-title mb--0 mr--20">Follow Us</h5>
+                                <ul class="social-icon color-tertiary md-size justify-content-start">
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- End Post List  -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Top Area  -->
+
+            <!-- Start Copyright Area  -->
+            <div class="copyright-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-9 col-md-8">
+                            <div class="copyright-left">
+                                <ul class="mainmenu justify-content-start">
+                                    <li>
+                                        <a class="hover-flip-item-wrapper" href="#">
+                                            <span class="hover-flip-item">
+                                                <span data-text="Contact Us">Contact Us</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="hover-flip-item-wrapper" href="#">
+                                            <span class="hover-flip-item">
+                                                <span data-text="Terms of Use">Terms of Use</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="hover-flip-item-wrapper" href="#">
+                                            <span class="hover-flip-item">
+                                                <span data-text="AdChoices">AdChoices</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="hover-flip-item-wrapper" href="#">
+                                            <span class="hover-flip-item">
+                                                <span data-text="Advertise with Us">Advertise with Us</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="hover-flip-item-wrapper" href="#">
+                                            <span class="hover-flip-item">
+                                                <span data-text="Blogar Store">Blogar Store</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                            <div class="copyright-right text-md-end mt_sm--20 text-start">
+                                <p class="b3">All Rights Reserved © 2022</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- End Copyright Area  -->
         </div>
+        <!-- End Footer Area  -->
+
+        <!-- Start Back To Top  -->
+        <a id="backto-top"></a>
+        <!-- End Back To Top  -->
+
     </div>
-    <!-- Footer End -->
-    <div class="fb-messengermessageus" messenger_app_id="100063725559198 " page_id="100063725559198"
-        color="<blue | white>" ref="<PASS_THROUGH_PARAM>" size="<standard | large | xlarge>">
-    </div>
 
-    <!-- Footer Bottom Start -->
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 copyright">
-                    <p>Copyright &copy; <a href="https://htmlcodex.com">HTML Codex</a>. All Rights Reserved</p>
-                </div>
-
-                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                <div class="col-md-6 template-by">
-                    <p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer Bottom End -->
+    <!-- JS
+============================================ -->
+    <!-- Modernizer JS -->
+    <script src="{{ asset('frontend') }}/assets/js/vendor/modernizr.min.js"></script>
+    <!-- jQuery JS -->
+    <script src="{{ asset('frontend') }}/assets/js/vendor/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('frontend') }}/assets/js/vendor/bootstrap.min.js"></script>
+    <script src="{{ asset('frontend') }}/assets/js/vendor/slick.min.js"></script>
+    <script src="{{ asset('frontend') }}/assets/js/vendor/tweenmax.min.js"></script>
+    <script src="{{ asset('frontend') }}/assets/js/vendor/js.cookie.js"></script>
+    <script src="{{ asset('frontend') }}/assets/js/vendor/jquery.style.switcher.js"></script>
 
 
-    <!-- Back to Top -->
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- Main JS -->
+    <script src="{{ asset('frontend') }}/assets/js/main.js"></script>
 
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('frontend') }}/lib/easing/easing.min.js"></script>
-    <script src="{{ asset('frontend') }}/lib/slick/slick.min.js"></script>
-
-
-    <!-- Template Javascript -->
-    <script src="{{ asset('frontend') }}/js/main.js"></script>
-   <!-- GetButton.io widget -->
-<script type="text/javascript">
-    (function () {
-        var options = {
-            facebook: "100063725559198", // Facebook page ID
-            whatsapp: "+8801641879498", // WhatsApp number
-            call_to_action: "Message us", // Call to action
-            button_color: "#FF6550", // Color of button
-            position: "left", // Position may be 'right' or 'left'
-            order: "facebook,whatsapp", // Order of buttons
-        };
-        var proto = 'https:', host = "getbutton.io", url = proto + '//static.' + host;
-        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
-        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
-        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-    })();
-</script>
-<!-- /GetButton.io widget -->
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {},
-            Tawk_LoadStart = new Date();
-        (function() {
-            var s1 = document.createElement("script"),
-                s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/63464da354f06e12d899b339/1gf59ui9n';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
-    <!--End of Tawk.to Script-->
 </body>
 
 </html>

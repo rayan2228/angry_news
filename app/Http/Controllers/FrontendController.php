@@ -11,9 +11,29 @@ class FrontendController extends Controller
     {
         return view('index');
     }
-    public function post()
+    public function about()
     {
-        $post_data = Post::find(18);
-        return view('frontend.singlePost', compact('post_data'));
+        return view('frontend.about');
     }
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
+    public function authors()
+    {
+        return view('frontend.author');
+    }
+    public function single_author()
+    {
+        return view('frontend.single_author');
+    }
+    public function search()
+    {
+        return view('frontend.post-list');
+    }
+    public function archive()
+    {
+        return view('frontend.archive');
+    }
+   
 }

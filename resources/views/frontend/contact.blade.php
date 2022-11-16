@@ -1,58 +1,76 @@
 @extends('frontend.layouts.guest')
 @section('content')
-    <!-- Contact Start -->
-    <div class="contact">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-4">
-                    <div class="form">
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="Your Name" />
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <input type="email" class="form-control" placeholder="Your Email" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Subject" />
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="5" placeholder="Message"></textarea>
-                            </div>
-                            <div><button class="btn" type="submit">Send Message</button></div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="map">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3020.985767636229!2d-73.52689268518203!3d40.78432704112558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c281127307115f%3A0x90d5abaf2f0279de!2sTerry%20Ln%2C%20Jericho%2C%20NY%2011753%2C%20USA!5e0!3m2!1sen!2sbd!4v1580837516748!5m2!1sen!2sbd"
-                            frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="contact-info">
-                        <h3>Get in Touch</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra
-                            dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus.
-                        </p>
-                        <h4><i class="fa fa-map-marker"></i>123 Terry Lane, New York, USA</h4>
-                        <h4><i class="fa fa-envelope"></i>email@example.com</h4>
-                        <h4><i class="fa fa-phone"></i>+123-456-7890</h4>
-                        <div class="social">
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook"></i></a>
-                            <a href=""><i class="fab fa-linkedin"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
+     <!-- Start Banner Area  -->
+        <div class="axil-banner banner-style-1 bg_image bg_image--3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="inner">
+                            <h1 class="title">Contact Us</h1>
+                            <p class="description">Wherever &#38; whenever you need us. We are here for you – contact us for all your support needs.<br /> be it technical, general queries or information support.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Contact End -->
+        <!-- End Banner Area  -->
+
+        <!-- Start Post List Wrapper  -->
+        <div class="axil-post-list-area axil-section-gap bg-color-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-xl-8">
+                        <!-- Start About Area  -->
+                        <div class="axil-about-us">
+                            <div class="inner">
+                                <h2>Say Hello! </h2>
+                                <p>Donec cursus dolor vitae congue consectetur. Morbi mattis viverra felis. Etiam dapibus id turpis at sagittis. Cras mollis mi vel ante ultricies, id ullamcorper mi pulvinar. Proin bibendum ornare risus, lacinia cursus quam condimentum id. Curabitur auctor massa eget porttitor molestie. Aliquam imperdiet dolor nec metus pulvinar sollicitudin. </p>
+                                <p><strong>Aliquam iaculis at odio ut tempus</strong>. Suspendisse blandit luctus dui, a consequat mauris mollis id. Sed in ante at tortor malesuada imperdiet. Vestibulum sed gravida nibh. Nulla suscipit congue lorem, id tempor ipsum molestie sit amet. Nulla ultricies vitae erat in tincidunt. Maecenas tempus quam et ipsum elementum, a efficitur lectus tincidunt. Praesent diam elit, tincidunt ac tempus vulputate, aliquet viverra mauris. Etiam eu nunc efficitur, sagittis est ut, fringilla neque. Ut interdum eget lorem eget congue. Ut nec arcu placerat, mattis urna vel, consequat diam. Sed in leo in dolor suscipit molestie. </p>
+                                <p class="primary-color">Email: <a href="#">mepress@gmail.com</a></p>
+                            </div>
+                            <!-- Start Contact Form  -->
+                            <div class="axil-section-gapTop axil-contact-form-area">
+                                <h4 class="title mb--10">Send Us a Message</h4>
+                                <p class="b3 mb--30">Your email address will not be published. All the fields are required.</p>
+                                <form id="contact-form" method="POST" action="https://new.axilthemes.com/demo/template/blogar/mail.php" class="axil-contact-form contact-form--1 row">
+                                    <div class="col-lg-4 col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="contact-name">Your Name</label>
+                                            <input name="contact-name" id="contact-name" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="contact-phone">Phone</label>
+                                            <input type="text" name="contact-phone" id="contact-phone">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label>Your Email</label>
+                                            <input for="contact-email" name="contact-email" id="contact-email" type="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="contact-message">Your Message</label>
+                                            <textarea name="contact-message" id="contact-message"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-submit">
+                                            <button name="submit" type="submit" id="submit" class="axil-button button-rounded btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- End Contact Form  -->
+                        </div>
+                        <!-- End About Area  -->
+                    </div>
+                    <x-frontend.sidebar/>
+                </div>
+            </div>
+        </div>
+        <!-- End Post List Wrapper  -->
 @endsection

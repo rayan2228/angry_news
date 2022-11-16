@@ -30,7 +30,9 @@
     <!--end breadcrumb-->
 
     <div class="profile-cover bg-dark"
-        style="background: url({{ asset('uploads/cover_pics') }}/{{ auth()->guard('admin')->user()->cover_pic }});background-size:cover;">
+        @if (auth()->guard('admin')->user()->cover_pic)
+            style="background: url({{ asset('uploads/cover_pics') }}/{{ auth()->guard('admin')->user()->cover_pic }});background-size:cover;"
+        @endif>
     </div>
 
     <div class="row">
