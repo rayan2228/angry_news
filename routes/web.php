@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddUserController;
 use App\Http\Controllers\AdminProfile;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagsController;
@@ -28,6 +29,7 @@ Route::get('/search', [FrontendController::class, 'search'])->name('search');
 Route::get('/archive', [FrontendController::class, 'archive'])->name('archive');
 Route::get('/post_details/{slug}', [FrontendController::class, 'post_details'])->name('post_details');
 Route::get('/maintenance', [FrontendController::class, 'maintenance'])->name('maintenance');
+Route::resource('/comment',CommentsController::class);
 
 
 Route::get('/dashboard', function () {
