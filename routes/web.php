@@ -26,13 +26,13 @@ Route::get('/authors', [FrontendController::class, 'authors'])->name('authors');
 Route::get('/author/{id}', [FrontendController::class, 'single_author'])->name('author');
 Route::get('/search', [FrontendController::class, 'search'])->name('search');
 Route::get('/archive', [FrontendController::class, 'archive'])->name('archive');
-Route::get('/post_details/{id}', [FrontendController::class, 'post_details'])->name('post_details');
+Route::get('/post_details/{slug}', [FrontendController::class, 'post_details'])->name('post_details');
 Route::get('/maintenance', [FrontendController::class, 'maintenance'])->name('maintenance');
 
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('frontend.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 

@@ -71,18 +71,17 @@
                                                                     <td>{{ $trashPost->post_heading }}</td>
                                                                     </td>
                                                                     <td>
-                                                                            <div
-                                                                                class="gap-3 d-flex align-items-center fs-6">
-                                                                                <a href="{{ route('admin.post.restore', ['post' => $trashPost->id]) }}"
-                                                                                    class="text-success"><i
-                                                                                        class="fa-solid fa-rotate-left"></i>
-                                                                                </a>
-                                                                                <butoon class="text-danger delete"
-                                                                                    value="{{ route('admin.post.trash', ['post' => $trashPost->id]) }}">
-                                                                                    <i class="bi bi-trash-fill"></i>
-                                                                                </butoon>
-                                                                            </div>
-                                                                        </td>
+                                                                        <div class="gap-3 d-flex align-items-center fs-6">
+                                                                            <a href="{{ route('admin.post.restore', ['post' => $trashPost->id]) }}"
+                                                                                class="text-success"><i
+                                                                                    class="fa-solid fa-rotate-left"></i>
+                                                                            </a>
+                                                                            <butoon class="text-danger delete"
+                                                                                value="{{ route('admin.post.trash', ['post' => $trashPost->id]) }}">
+                                                                                <i class="bi bi-trash-fill"></i>
+                                                                            </butoon>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                             @empty
                                                                 <tr>
@@ -115,6 +114,8 @@
                                             <th>Serial</th>
                                             <th>Heading</th>
                                             <th>Slug</th>
+                                            <th>Type </th>
+                                            <th>Featured </th>
                                             <th>Thumbnail</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -127,7 +128,25 @@
                                                 <td><a
                                                         href="{{ route('admin.post.show', ['post' => $post->id]) }}">{{ $post->post_heading }}</a>
                                                 </td>
-                                                <td>{{ $post->post_slug }}</td>
+                                                <td><textarea class="form-control" readonly style="outline: none ;border:none; resize:none;background: transparent" >{{ $post->post_slug }}</textarea></td>
+                                                <td>
+                                                    @if ($post->post_type === 'popular')
+                                                        <i class="fa-solid fa-fire"
+                                                            style="color: orange; font-size:16px;"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-bolt"
+                                                            style="color: blue; font-size:16px;"></i>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($post->featured === 'active')
+                                                        <i class="fa-solid fa-eye"
+                                                            style="color: green; font-size:16px;"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-eye-slash"
+                                                            style="color: red; font-size:16px;"></i>
+                                                    @endif
+                                                </td>
                                                 <td><img src="{{ asset('uploads/post_thumbnail') }}/{{ $post->post_thumbnail }}"
                                                         alt="{{ $post->post_thumbnail }}" width=100 height=100></td>
                                                 <td>

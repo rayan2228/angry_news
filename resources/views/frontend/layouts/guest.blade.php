@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/vendor/slick-theme.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/vendor/base.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/plugins/plugins.css">
-    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/style.css">
 
+    @vite(['public/frontend/assets/css/style.css'])
 </head>
 
 <body>
@@ -54,8 +54,10 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-3 col-12">
                         <div class="logo">
                             <a href="index.html">
-                                <img class="dark-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-black.png" alt="Blogar logo">
-                                <img class="light-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png" alt="Blogar logo">
+                                <img class="dark-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-black.png"
+                                    alt="Blogar logo">
+                                <img class="light-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png"
+                                    alt="Blogar logo">
                             </a>
                         </div>
                     </div>
@@ -99,12 +101,19 @@
                                     </div>
                                 </form>
                             </div>
-                            <ul class="metabar-block">
-                                <li class="icon"><a href="#"><i class="fas fa-bookmark"></i></a></li>
-                                <li class="icon"><a href="#"><i class="fas fa-bell"></i></a></li>
-                                <li><a href="#"><img src="{{ asset('frontend') }}/assets/images/others/author.png"
-                                            alt="Author Images"></a></li>
-                            </ul>
+                            @if (auth()->user() ??
+                                auth()->guard('admin')->user())
+                           
+                                <ul class="metabar-block">
+                                    <li class="icon"><a href="#"><i class="fas fa-bookmark"></i></a></li>
+                                    <li class="icon"><a href="#"><i class="fas fa-bell"></i></a></li>
+                                    <li><a href="#"><img
+                                                src="{{ asset('frontend') }}/assets/images/others/author.png"
+                                                alt="Author Images"></a></li>
+                                </ul>
+                            @else
+                                <a href="{{ route('login') }}" class="axil-button button-rounded">LOGIN</a>
+                            @endif
                             <!-- Start Hamburger Menu  -->
                             <div class="hamburger-menu d-block d-xl-none">
                                 <div class="hamburger-inner">
@@ -125,8 +134,10 @@
                 <div class="mobile-menu-top">
                     <div class="logo">
                         <a href="index.html">
-                            <img class="dark-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-black.png" alt="Logo Images">
-                            <img class="light-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png" alt="Logo Images">
+                            <img class="dark-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-black.png"
+                                alt="Logo Images">
+                            <img class="light-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png"
+                                alt="Logo Images">
                         </a>
                     </div>
                     <div class="mobile-close">
@@ -149,7 +160,7 @@
                 </ul>
             </div>
         </div>
-        <!-- End Mobile Menu Area  -->        
+        <!-- End Mobile Menu Area  -->
         <!-- Start content Area  -->
         @yield('content')
         <!-- End content Area  -->
@@ -168,37 +179,43 @@
                         <ul class="instagram-post-list">
                             <li class="single-post">
                                 <a href="#">
-                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-01.jpg" alt="Instagram Images">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-01.jpg"
+                                        alt="Instagram Images">
                                     <span class="instagram-button"><i class="fab fa-instagram"></i></span>
                                 </a>
                             </li>
                             <li class="single-post">
                                 <a href="#">
-                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-02.jpg" alt="Instagram Images">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-02.jpg"
+                                        alt="Instagram Images">
                                     <span class="instagram-button"><i class="fab fa-instagram"></i></span>
                                 </a>
                             </li>
                             <li class="single-post">
                                 <a href="#">
-                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-03.jpg" alt="Instagram Images">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-03.jpg"
+                                        alt="Instagram Images">
                                     <span class="instagram-button"><i class="fab fa-instagram"></i></span>
                                 </a>
                             </li>
                             <li class="single-post">
                                 <a href="#">
-                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-04.jpg" alt="Instagram Images">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-04.jpg"
+                                        alt="Instagram Images">
                                     <span class="instagram-button"><i class="fab fa-instagram"></i></span>
                                 </a>
                             </li>
                             <li class="single-post">
                                 <a href="#">
-                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-05.jpg" alt="Instagram Images">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-05.jpg"
+                                        alt="Instagram Images">
                                     <span class="instagram-button"><i class="fab fa-instagram"></i></span>
                                 </a>
                             </li>
                             <li class="single-post">
                                 <a href="#">
-                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-06.jpg" alt="Instagram Images">
+                                    <img src="{{ asset('frontend') }}/assets/images/small-images/instagram-md-06.jpg"
+                                        alt="Instagram Images">
                                     <span class="instagram-button"><i class="fab fa-instagram"></i></span>
                                 </a>
                             </li>
@@ -208,7 +225,6 @@
             </div>
         </div>
         <!-- End Instagram Area  -->
-
         <!-- Start Footer Area  -->
         <div class="axil-footer-area axil-footer-style-1 footer-variation-2">
             <div class="footer-mainmenu">
@@ -328,8 +344,11 @@
                         <div class="col-lg-4 col-md-4">
                             <div class="logo">
                                 <a href="index.html">
-                                    <img class="dark-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-black.png" alt="Logo Images">
-                                    <img class="white-logo" src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png"
+                                    <img class="dark-logo"
+                                        src="{{ asset('frontend') }}/assets/images/logo/logo-black.png"
+                                        alt="Logo Images">
+                                    <img class="white-logo"
+                                        src="{{ asset('frontend') }}/assets/images/logo/logo-white2.png"
                                         alt="Logo Images">
                                 </a>
                             </div>
@@ -434,7 +453,7 @@
 
     <!-- Main JS -->
     <script src="{{ asset('frontend') }}/assets/js/main.js"></script>
-
+    @yield('script')
 </body>
 
 </html>

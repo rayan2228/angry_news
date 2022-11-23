@@ -1,8 +1,6 @@
-
-
-
-
-        <!-- Start Banner Area -->
+@extends('frontend.layouts.guest')
+@section('content')
+ <!-- Start Banner Area -->
         <div class="banner banner-single-post post-formate post-standard alignwide">
             <div class="container">
                 <div class="row">
@@ -215,53 +213,26 @@
                                     <div class="title">
                                         <h4 class="mb--0">30+ Comments</h4>
                                     </div>
-                                    <div class="add-comment-button cerchio">
-                                        <a class="axil-button button-rounded" href="post-details.html" tabindex="0"><span>Add Your Comment</span></a>
-                                    </div>
+
                                 </div>
 
                                 <!-- Start Comment Respond  -->
                                 <div class="comment-respond">
                                     <h4 class="title">Post a comment</h4>
                                     <form action="#">
-                                        <p class="comment-notes"><span id="email-notes">Your email address will not be
-                                                published.</span> Required fields are marked <span
-                                                class="required">*</span></p>
                                         <div class="row row--10">
-                                            <div class="col-lg-4 col-md-4 col-12">
-                                                <div class="form-group">
-                                                    <label>Your Name</label>
-                                                    <input id="name" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-12">
-                                                <div class="form-group">
-                                                    <label>Your Email</label>
-                                                    <input id="email" type="email">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-12">
-                                                <div class="form-group">
-                                                    <label>Your Website</label>
-                                                    <input id="website" type="text">
-                                                </div>
-                                            </div>
+
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label>Leave a Reply</label>
-                                                    <textarea name="message"></textarea>
+                                                    <textarea name="comment" class="comment" style="color:
+                                                    -#3858F6"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
-                                                <p class="comment-form-cookies-consent">
-                                                    <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes">
-                                                    <label for="wp-comment-cookies-consent">Save my name, email, and
-                                                        website in this browser for the next time I comment.</label>
-                                                </p>
-                                            </div>
+
                                             <div class="col-lg-12">
                                                 <div class="form-submit cerchio">
-                                                    <input name="submit" type="submit" id="submit" class="axil-button button-rounded" value="Post Comment">
+                                                    <button id="submit" class="axil-button button-rounded" >Post Comment</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -292,9 +263,9 @@
                                                             <div class="time-spent">Nov 23, 2018 at 12:23 pm</div>
                                                             <div class="reply-edit">
                                                                 <div class="reply">
-                                                                    <a class="comment-reply-link hover-flip-item-wrapper" href="#">
+                                                                    <a class="comment-reply-link hover-flip-item-wrapper" >
                                                                         <span class="hover-flip-item">
-                                                                            <span data-text="Reply">Reply</span>
+                                                                            <span data-text="Reply" class="reply1">Reply</span>
                                                                         </span>
                                                                     </a>
                                                                 </div>
@@ -537,7 +508,7 @@
                             <!-- Start Single Widget  -->
                             <div class="axil-single-widget widget widget_newsletter mb--30">
                                 <!-- Start Post List  -->
-                                <div class="newsletter-inner text-center">
+                                <div class="text-center newsletter-inner">
                                     <h4 class="title mb--15">Never Miss A Post!</h4>
                                     <p class="b2 mb--30">Sign up for free and be the first to <br /> get notified about updates.</p>
                                     <form action="#">
@@ -799,113 +770,13 @@
             </div>
         </div>
         <!-- End Post Single Wrapper  -->
-
-        <!-- Start More Stories Area  -->
-        <div class="axil-more-stories-area axil-section-gap bg-color-grey">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title">
-                            <h2 class="title">More Stories</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <!-- Start Stories Post  -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <!-- Start Post List  -->
-                        <div class="post-stories content-block mt--30">
-                            <div class="post-thumbnail">
-                                <a href="post-details.html">
-                                    <img src="{{ asset('frontend') }}/assets/images/post-single/stories-01.jpg" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a href="#">LEADERSHIP</a>
-                                    </div>
-                                </div>
-                                <h5 class="title"><a href="post-details.html">Microsoft and Bridgestone launch real-time
-                                        tire</a></h5>
-                            </div>
-                        </div>
-                        <!-- End Post List  -->
-                    </div>
-                    <!-- Start Stories Post  -->
-
-                    <!-- Start Stories Post  -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <!-- Start Post List  -->
-                        <div class="post-stories content-block mt--30">
-                            <div class="post-thumbnail">
-                                <a href="post-details.html">
-                                    <img src="{{ asset('frontend') }}/assets/images/post-single/stories-02.jpg" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a href="#">DESIGN</a>
-                                    </div>
-                                </div>
-                                <h5 class="title"><a href="post-details.html">Microsoft and Bridgestone launch real-time
-                                        tire</a></h5>
-                            </div>
-                        </div>
-                        <!-- End Post List  -->
-                    </div>
-                    <!-- Start Stories Post  -->
-
-                    <!-- Start Stories Post  -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <!-- Start Post List  -->
-                        <div class="post-stories content-block mt--30">
-                            <div class="post-thumbnail">
-                                <a href="post-details.html">
-                                    <img src="{{ asset('frontend') }}/assets/images/post-single/stories-03.jpg" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a href="#">PRODUCT UPDATES</a>
-                                    </div>
-                                </div>
-                                <h5 class="title"><a href="post-details.html">Microsoft and Bridgestone launch real-time
-                                        tire</a></h5>
-                            </div>
-                        </div>
-                        <!-- End Post List  -->
-                    </div>
-                    <!-- Start Stories Post  -->
-
-                    <!-- Start Stories Post  -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <!-- Start Post List  -->
-                        <div class="post-stories content-block mt--30">
-                            <div class="post-thumbnail">
-                                <a href="post-details.html">
-                                    <img src="{{ asset('frontend') }}/assets/images/post-single/stories-04.jpg" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a href="#">COLLABORATION</a>
-                                    </div>
-                                </div>
-                                <h5 class="title"><a href="post-details.html">Microsoft and Bridgestone launch real-time
-                                        tire</a></h5>
-                            </div>
-                        </div>
-                        <!-- End Post List  -->
-                    </div>
-                    <!-- Start Stories Post  -->
-                </div>
-            </div>
-        </div>
-        <!-- End More Stories Area  -->
-
-       
+@endsection
+@section('script')
+    <script>
+        let reply = document.querySelector('.reply1');
+        let comment = document.querySelector('.comment');
+        reply.addEventListener('click',function(){
+            comment.focus();
+        })
+    </script>
+@endsection

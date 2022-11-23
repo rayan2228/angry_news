@@ -39,7 +39,7 @@
                 <div class="col-12 col-lg-12 d-flex">
                     <div class="border shadow-none card w-100">
                         <div class="card-body">
-                            <form class="row g-3" method="POST" action="{{ route('admin.category.store') }}">
+                            <form class="row g-3" method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
                                     <label class="form-label">Name</label>
@@ -52,6 +52,13 @@
                                 <div class="col-12">
                                     <label class="form-label">Slug</label>
                                     <input type="text" class="form-control" placeholder="Slug name" name="category_slug">
+                                    @error('category_slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Category Image</label>
+                                    <input type="file" class="form-control"  name="category_image">
                                     @error('category_slug')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

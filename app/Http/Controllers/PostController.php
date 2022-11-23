@@ -117,6 +117,7 @@ class PostController extends Controller
             "post_description" => $post_description,
             "post_status" => $request->post_status,
             "featured" => $request->post_featured,
+            "post_type" => $request->post_type,
             "created_at" => Carbon::now(),
         ]);
 
@@ -224,6 +225,7 @@ class PostController extends Controller
             "parent_category_id" => $request->parent_category_id,
             "post_status" => $request->post_status,
             "featured" => $request->post_featured,
+            "post_type" => $request->post_type,
         ]);
         if ($request->subCategory_id != null) {
             $post->relationSubCategories()->detach();

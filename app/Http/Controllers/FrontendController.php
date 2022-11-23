@@ -35,5 +35,8 @@ class FrontendController extends Controller
     {
         return view('frontend.archive');
     }
-   
+    public function post_details($id)
+    {
+        return view('frontend.post-details');
+    }
 }

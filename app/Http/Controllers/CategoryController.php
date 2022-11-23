@@ -6,8 +6,9 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
+use Intervention\Image\Facades\Image;
 class CategoryController extends Controller
 {
     /**
@@ -17,7 +18,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       
     }
 
     /**
@@ -30,8 +30,8 @@ class CategoryController extends Controller
         $allCategories = Category::all();
         $trashCategories = Category::onlyTrashed()->get();
         $categories = Category::paginate(5);
-        $subCategories = SubCategory::paginate(5);
-        $trashSubCategories = SubCategory::onlyTrashed()->get();
+        $subCategories = SubCategory::with('relationCategory')->paginate(5);
+        $trashSubCategories = SubCategory::with('relationCategory')->onlyTrashed()->get();
         return view('backend.category.create', compact('categories', 'subCategories', 'allCategories', 'trashCategories', 'trashSubCategories'));
     }
 
@@ -48,19 +48,25 @@ class CategoryController extends Controller
             "category_slug" => "unique:categories,category_slug",
         ]);
         if ($request->category_slug) {
-            $salt = "_".Str::random(8);
+            $salt = "_" . Str::random(8);
             $slug = Str::slug($request->category_slug .= $salt, "_");
         } else {
             $slug = Str::slug($request->category_name, "_");
         }
+        $category_image_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('category_image')->getClientOriginalExtension();
+        Image::make($request->file('category_image'))->save(base_path('public/uploads/category_image/' . $category_image_name), 80);
         if ($request->category_id != 0) {
             $request->validate([
                 "category_name" => "required | unique:sub_categories,subCategory_name",
                 "category_slug" => "required | unique:sub_categories,subCategory_slug",
+                "category_image" => "required mimes:png,jpg",
             ]);
+            $subCategory_image_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('category_image')->getClientOriginalExtension();
+            Image::make($request->file('category_image'))->save(base_path('public/uploads/subCategory_image/' . $subCategory_image_name), 80);
             SubCategory::insert([
                 "subCategory_name" => $request->category_name,
                 "subCategory_slug" => $slug,
+                "subCategory_image" => $subCategory_image_name,
                 "category_id" => $request->category_id,
                 "subCategory_description" => $request->category_description,
                 "subCategory_status" => $request->category_status,
@@ -70,6 +76,7 @@ class CategoryController extends Controller
             Category::insert([
                 "category_name" => $request->category_name,
                 "category_slug" => $slug,
+                "category_image" => $category_image_name,
                 "category_description" => $request->category_description,
                 "category_status" => $request->category_status,
                 'created_at' => Carbon::now(),
@@ -201,8 +208,8 @@ class CategoryController extends Controller
         $hasParentCategory = SubCategory::onlyTrashed()->find($subcategory)->category_id;
         $checkParentCategoryOnTrash = Category::onlyTrashed()->find($hasParentCategory)->deleted_at ?? 0;
         if ($checkParentCategoryOnTrash) {
-            return back()->with('error','parent category on trash');
-        }else{
+            return back()->with('error', 'parent category on trash');
+        } else {
             SubCategory::onlyTrashed()->find($subcategory)->restore();
             return back()->with('restore', 'category restored');
         }

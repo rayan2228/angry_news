@@ -95,17 +95,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    {{-- <div class="mb-2 col-6">
-                                        <div class="row">
-                                            <div class="mb-2 col-10">
-                                                <label class="form-label">Add Tags</label>
-                                                <input type="text" class="form-control" name="tag" id="tags_value">
-                                            </div>
-                                            <div class="mt-4 col-2">
-                                                <button class="btn btn-info" id="add_tag">Add</button>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="mb-2 col-6">
                                         <label class="form-label">Select Tags</label>
                                         <select class="select_js form-select" name="tag_id[]" multiple="multiple">
@@ -124,6 +113,14 @@
                                     </div>
                                 </div>
 
+                                <div class="mb-2 col-12">
+                                   <label class="form-label">Post Type</label>
+                                        <select class="form-select" name="post_type">
+                                           <option value="top">top</option>
+                                           <option value="top">popular</option>
+                                        </select>
+                                       
+                                </div>
                                 <div class="mb-2 col-12">
                                     <label class="form-label">Post Description</label>
                                     <textarea class="form-control" name="post_description" id="summernote">{{ old('post_description') }}</textarea>
@@ -168,31 +165,6 @@
                     });
                 }
             })
-            // $('#add_tag').click(function(event) {
-            //     event.preventDefault()
-            //     var tags_value = $("#tags_value").val();
-            //     if (tags_value) {
-            //         $.ajaxSetup({
-            //             headers: {
-            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //             }
-            //         });
-            //         $.ajax({
-            //             type: 'POST',
-            //             url: '/admin/tags',
-            //             data: {
-            //                 tags_value: tags_value
-            //             },
-            //             success: function(data) {
-
-            //                     alert(data.success);
-            //                     location.reload();
-            //                 // alert(data)
-            //                 // $("#sub_category").html(data);
-            //             }
-            //         });
-            //     }
-            // })
         })
     </script>
     @if (session('success'))
