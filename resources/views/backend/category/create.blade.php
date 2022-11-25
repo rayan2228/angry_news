@@ -39,7 +39,8 @@
                 <div class="col-12 col-lg-12 d-flex">
                     <div class="border shadow-none card w-100">
                         <div class="card-body">
-                            <form class="row g-3" method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">
+                            <form class="row g-3" method="POST" action="{{ route('admin.category.store') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
                                     <label class="form-label">Name</label>
@@ -58,7 +59,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label">Category Image</label>
-                                    <input type="file" class="form-control"  name="category_image">
+                                    <input type="file" class="form-control" name="category_image">
                                     @error('category_slug')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -186,7 +187,9 @@
 
                                                 <td>{{ $categories->firstItem() + $loop->index }}</td>
                                                 <td>{{ $category->category_name }}</td>
-                                                <td>{{ $category->category_description }}</td>
+                                                <td>
+                                                    <p>{{ $category->category_description }}</p>
+                                                </td>
                                                 <td>{{ $category->category_slug }}</td>
                                                 <td>
                                                     @if ($category->category_status === 'active')
@@ -209,12 +212,10 @@
                                                             method="post" id="delete">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a href="#"
-                                                                onclick="document.getElementById('delete').submit()"
-                                                                class="text-danger" data-bs-toggle="tooltip"
-                                                                data-bs-placement="bottom" title=""
+                                                            <button type="submit"
+                                                                class="text-danger" style="background: none; border:none;" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="Delete" aria-label="Delete"><i
-                                                                    class="bi bi-trash-fill"></i></a>
+                                                                    class="bi bi-trash-fill"></i></button>
                                                         </form>
                                                     </div>
                                                 </td>

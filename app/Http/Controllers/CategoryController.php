@@ -46,6 +46,7 @@ class CategoryController extends Controller
         $request->validate([
             "category_name" => "required | unique:categories,category_name",
             "category_slug" => "unique:categories,category_slug",
+            "category_image" => "required | mimes:png,jpg",
         ]);
         if ($request->category_slug) {
             $salt = "_" . Str::random(8);
@@ -55,11 +56,12 @@ class CategoryController extends Controller
         }
         $category_image_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('category_image')->getClientOriginalExtension();
         Image::make($request->file('category_image'))->save(base_path('public/uploads/category_image/' . $category_image_name), 80);
+        // sub category
         if ($request->category_id != 0) {
             $request->validate([
                 "category_name" => "required | unique:sub_categories,subCategory_name",
-                "category_slug" => "required | unique:sub_categories,subCategory_slug",
-                "category_image" => "required mimes:png,jpg",
+                "category_slug" => "unique:sub_categories,subCategory_slug",
+                "category_image" => "required | mimes:png,jpg",
             ]);
             $subCategory_image_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('category_image')->getClientOriginalExtension();
             Image::make($request->file('category_image'))->save(base_path('public/uploads/subCategory_image/' . $subCategory_image_name), 80);
@@ -181,9 +183,12 @@ class CategoryController extends Controller
     {
         $subCategories = SubCategory::onlyTrashed()->where('category_id', $category)->get();
         foreach ($subCategories as  $subCategory) {
+            unlink(base_path('public/uploads/subCategory_image/' . $subCategory->subCategory_image));
             $subCategory->forceDelete();
         }
-        Category::onlyTrashed()->find($category)->forceDelete();
+        $category =  Category::onlyTrashed()->find($category);
+        unlink(base_path('public/uploads/category_image/' . $subCategory->category_image));
+        $category->forceDelete();
         return back()->with('delete', 'category deleted');
     }
     public function subDestroy(SubCategory $subcategory)
@@ -193,7 +198,9 @@ class CategoryController extends Controller
     }
     public function subDelete($subcategory)
     {
-        SubCategory::onlyTrashed()->find($subcategory)->forceDelete();
+        $subCategory = SubCategory::onlyTrashed()->find($subcategory);
+        unlink(base_path('public/uploads/subCategory_image/' . $subCategory->subCategory_image));
+        $subCategory->forceDelete();
         return back()->with('delete', 'category deleted');
     }
 
