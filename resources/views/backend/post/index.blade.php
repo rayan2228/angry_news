@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 @section('content')
     <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
         <div class="breadcrumb-title pe-3">Post</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
+                <ol class="p-0 mb-0 breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Post List</li>
@@ -28,17 +28,17 @@
         </div>
     </div>
     <div class="card">
-        <div class="card-header py-3">
+        <div class="py-3 card-header">
             <h6 class="mb-0">Post Lists</h6>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-lg-12 d-flex">
-                    <div class="card w-100 border shadow-none">
-                        <div class="card-header d-flex justify-content-between py-3">
+                    <div class="border shadow-none card w-100">
+                        <div class="py-3 card-header d-flex justify-content-between">
                             <h6 class="mb-0">Posts</h6>
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger mb-0" data-bs-toggle="modal"
+                            <button type="button" class="mb-0 btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#trash">
                                 Trash
                             </button>
@@ -86,7 +86,7 @@
                                                             @empty
                                                                 <tr>
                                                                     <td colspan="3">
-                                                                        <p class="text-danger text-center">no trash
+                                                                        <p class="text-center text-danger">no trash
                                                                             posts to
                                                                             show</p>
                                                                     </td>
@@ -128,7 +128,9 @@
                                                 <td><a
                                                         href="{{ route('admin.post.show', ['post' => $post->id]) }}">{{ $post->post_heading }}</a>
                                                 </td>
-                                                <td><textarea class="form-control" readonly style="outline: none ;border:none; resize:none;background: transparent" >{{ $post->post_slug }}</textarea></td>
+                                                <td>
+                                                    <textarea class="form-control" readonly style="width: 200px; outline: none ;border:none;background: transparent">{{ $post->post_slug }}</textarea>
+                                                </td>
                                                 <td>
                                                     @if ($post->post_type === 'popular')
                                                         <i class="fa-solid fa-fire"
@@ -159,7 +161,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex align-items-center fs-6 gap-3">
+                                                    <div class="gap-3 d-flex align-items-center fs-6">
                                                         <a href="{{ route('admin.post.edit', ['post' => $post->id]) }}"
                                                             class="text-warning" data-bs-toggle="tooltip"
                                                             data-bs-placement="bottom" title=""
@@ -181,15 +183,15 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5">
-                                                    <p class="text-danger text-center">no posts to show</p>
+                                                <td colspan="8">
+                                                    <p class="text-center text-danger">no posts to show</p>
                                                 </td>
                                             </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                             </div>
-                            <nav class="float-end mt-0" aria-label="Page navigation">
+                            <nav class="mt-0 float-end" aria-label="Page navigation">
                                 {{ $posts->withQueryString()->links() }}
                             </nav>
                         </div>

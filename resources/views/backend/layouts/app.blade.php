@@ -73,16 +73,30 @@
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                                 data-bs-toggle="dropdown">
                                 <div class="user-setting d-flex align-items-center">
-                                    <img src="{{ asset('backend') }}/assets/images/avatars/avatar-1.png"
-                                        class="user-img" alt="">
+                                     @if (auth()->guard('admin')->user()->profile_pic === null)
+                                              <img src="{{ asset('backend') }}/assets/images/avatars/avatar-1.png"
+                                                alt="" class=" user-img" >
+                                            @else
+                                                <img src="{{ asset('uploads/profile_pics') }}/{{ auth()->guard('admin')->user()->profile_pic }}"
+                                                    class=" user-img" 
+                                                    alt="{{ auth()->guard('admin')->user()->profile_pic }}">
+                                            @endif
+                                   
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item" href="{{ route('admin.profile.index') }}">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ asset('backend') }}/assets/images/avatars/avatar-1.png"
-                                                alt="" class="rounded-circle" width="54" height="54">
+                                            @if (auth()->guard('admin')->user()->profile_pic === null)
+                                              <img src="{{ asset('backend') }}/assets/images/avatars/avatar-1.png"
+                                                alt="" class="user-img" >
+                                            @else
+                                                <img src="{{ asset('uploads/profile_pics') }}/{{ auth()->guard('admin')->user()->profile_pic }}"
+                                                    class="user-img" 
+                                                    alt="{{ auth()->guard('admin')->user()->profile_pic }}">
+                                            @endif
+                                            
                                             <div class="ms-3">
                                                 <h6 class="mb-0 dropdown-user-name">
                                                     {{ auth()->guard('admin')->user()->name }}</h6>
@@ -635,7 +649,7 @@
                 placeholder: 'describe your post',
                 height: 400,
             });
-              $('.select_js').select2();
+            $('.select_js').select2();
         });
     </script>
     @yield('footer_script')

@@ -61,9 +61,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $request->validate([
             "post_heading" => "required",
-            "post_slug" => "required | unique:posts,post_slug",
+            "post_slug" => "unique:posts,post_slug",
             "post_description" => "required",
             "post_thumbnail" => "required | mimes:png,jpg",
         ]);
@@ -77,7 +79,7 @@ class PostController extends Controller
             $slug = Str::slug($request->post_heading, "_");
         }
         $post_thumbnail_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('post_thumbnail')->getClientOriginalExtension();
-        Image::make($request->file('post_thumbnail'))->resize(900, 600)->save(base_path('public/uploads/post_thumbnail/' . $post_thumbnail_name), 80);
+        Image::make($request->file('post_thumbnail'))->save(base_path('public/uploads/post_thumbnail/' . $post_thumbnail_name), 80);
 
         // summernote
         $post_description = $request->post_description;
@@ -95,7 +97,7 @@ class PostController extends Controller
                     $mimetype = $groups['mime'];
                     # Generating a random filename
                     $filename =
-                        Str::limit($slug, 5) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y');
+                        Str::limit($slug, 5) . '_' . Auth::guard('admin')->id() . '_' . time() . rand(10,1000) . '_' . Carbon::now()->format('Y');
                     $filepath = "uploads/post_thumbnail/$filename.$mimetype";
                     $image = Image::make($src)
                         ->encode($mimetype, 100)
@@ -107,7 +109,7 @@ class PostController extends Controller
             }
         }
         # modified entity ready to store in database
-        $post_description = $dom->saveHTML($dom->documentElement);
+        $post_description = $dom->saveHTML();
         $id = Post::insertGetId([
             "post_heading" => $request->post_heading,
             "post_slug" => $slug,
@@ -182,7 +184,7 @@ class PostController extends Controller
         if ($request->hasFile('post_thumbnail')) {
             unlink(base_path('public/uploads/post_thumbnail/' . $post->post_thumbnail));
             $post_thumbnail_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('post_thumbnail')->getClientOriginalExtension();
-            Image::make($request->file('post_thumbnail'))->resize(900, 600)->save(base_path('public/uploads/post_thumbnail/' . $post_thumbnail_name), 80);
+            Image::make($request->file('post_thumbnail'))->save(base_path('public/uploads/post_thumbnail/' . $post_thumbnail_name), 80);
             $post->update([
                 "post_thumbnail" => $post_thumbnail_name,
             ]);
@@ -272,11 +274,9 @@ class PostController extends Controller
                 $src = $img->getAttribute('src');
                 $filename = last(explode("/", $src));
                 unlink(base_path('public/uploads/post_thumbnail/' . $filename));
-                $img->removeAttribute('src');
                 # if the img source is 'data-url'
                 if (preg_match('/data:image/', $src)) {
                     unlink(base_path('public/uploads/post_thumbnail/' . $filename));
-                    $img->removeAttribute('src');
                 }
             }
         }

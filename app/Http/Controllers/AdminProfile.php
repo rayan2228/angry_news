@@ -28,7 +28,7 @@ class AdminProfile extends Controller
         }else {
             return back()->with('error','current password doesn\'t match');
         }
-        return back()->with('success', 'password changed');
+        return back()->with('update', 'password changed');
     }
     public function update(Request $request, $profile_id)
     {

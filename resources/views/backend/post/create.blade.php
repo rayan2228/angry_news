@@ -114,19 +114,20 @@
                                 </div>
 
                                 <div class="mb-2 col-12">
-                                   <label class="form-label">Post Type</label>
-                                        <select class="form-select" name="post_type">
-                                           <option value="top">top</option>
-                                           <option value="top">popular</option>
-                                        </select>
-                                       
+                                    <label class="form-label">Post Type</label>
+                                    <select class="form-select" name="post_type">
+                                        <option value="top">top</option>
+                                        <option value="popular">popular</option>
+                                    </select>
+
                                 </div>
                                 <div class="mb-2 col-12">
                                     <label class="form-label">Post Description</label>
-                                    <textarea class="form-control" name="post_description" id="summernote">{{ old('post_description') }}</textarea>
+                                    <textarea class="form-control" rows="50"name="post_description" id="editor1">{{ old('post_description') }}</textarea>
                                     @error('post_description')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
+
                                 </div>
                                 <div class="mb-2 col-12">
                                     <div class="d-grid">
@@ -188,7 +189,6 @@
                 })
             });
         </script>
-       
     @elseif (session('restore'))
         <script>
             $(document).ready(function() {
@@ -231,5 +231,16 @@
             });
         </script>
     @endif
+    <script src="https://cdn.tiny.cloud/1/tdsho3csnxwtvih34teop0xfxe57rigbkn7odeqi4yoeyhsl/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            images_upload_url: 'rayan',
+            automatic_uploads: false
+        });
+    </script>
 @endsection
 @endsection

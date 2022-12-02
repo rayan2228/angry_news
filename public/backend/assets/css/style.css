@@ -670,7 +670,9 @@ a {
     justify-content: center;
     background: rgba(255, 255, 255, 0.15);
 }
-
+.image_width{
+    width: 962px;
+}
 .fm-icon-box {
     font-size: 32px;
     background: #fff;
