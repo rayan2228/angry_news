@@ -27,6 +27,13 @@
                                         value="{{ $category->category_slug }}">
                                 </div>
                                 <div class="col-12">
+                                    <label class="form-label">Category Image</label>
+                                    <input type="file" class="form-control" name="category_image">
+                                    @error('category_slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-12">
                                     <label class="form-label">Category Status</label>
                                     <select class="form-select" name="category_status">
                                         <option value="active" @if ($category->category_status === 'active') selected @endif>active
@@ -52,5 +59,4 @@
             </div>
         </div>
     </div>
-
 @endsection

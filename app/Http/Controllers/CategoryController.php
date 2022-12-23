@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+
 class CategoryController extends Controller
 {
     /**
@@ -54,8 +55,6 @@ class CategoryController extends Controller
         } else {
             $slug = Str::slug($request->category_name, "_");
         }
-        $category_image_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('category_image')->getClientOriginalExtension();
-        Image::make($request->file('category_image'))->save(base_path('public/uploads/category_image/' . $category_image_name), 80);
         // sub category
         if ($request->category_id != 0) {
             $request->validate([
@@ -75,6 +74,8 @@ class CategoryController extends Controller
                 'created_at' => Carbon::now(),
             ]);
         } else {
+            $category_image_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('category_image')->getClientOriginalExtension();
+            Image::make($request->file('category_image'))->save(base_path('public/uploads/category_image/' . $category_image_name), 80);
             Category::insert([
                 "category_name" => $request->category_name,
                 "category_slug" => $slug,
@@ -127,12 +128,21 @@ class CategoryController extends Controller
         $request->validate([
             "category_name" => "required | unique:categories,category_name",
             "category_slug" => "unique:categories,category_slug",
+            "category_image" => "mimes:png,jpg",
         ]);
         if ($request->category_slug) {
             $salt = "_" . Str::random(8);
             $slug = Str::slug($request->category_slug .= $salt, "_");
         } else {
             $slug = Str::slug($request->category_name, "_");
+        }
+        if ($request->hasFile('category_image')) {
+            unlink(base_path('public/uploads/subCategory_image/' . $category->category_image));
+            $subCategory_image_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('category_image')->getClientOriginalExtension();
+            Image::make($request->file('category_image'))->save(base_path('public/uploads/subCategory_image/' . $subCategory_image_name), 80);
+            $category->update([
+                "subCategory_image" => $subCategory_image_name,
+            ]);
         }
         $category->update([
             "category_name" => $request->category_name,
@@ -147,12 +157,21 @@ class CategoryController extends Controller
         $request->validate([
             "category_name" => "required | unique:sub_categories,subCategory_name",
             "category_slug" => "unique:sub_categories,subCategory_slug",
+            "category_image" => "mimes:png,jpg",
         ]);
         if ($request->category_slug) {
             $salt = "_" . Str::random(8);
             $slug = Str::slug($request->category_slug .= $salt, "_");
         } else {
             $slug = Str::slug($request->category_name, "_");
+        }
+        if ($request->hasFile('category_image')) {
+            unlink(base_path('public/uploads/category_image/' . $subcategory->category_image));
+            $category_image_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('category_image')->getClientOriginalExtension();
+            Image::make($request->file('category_image'))->save(base_path('public/uploads/category_image/' . $category_image_name), 80);
+            $subcategory->update([
+                "category_image" => $category_image_name,
+            ]);
         }
         $subcategory->update([
             "subCategory_name" => $request->category_name,

@@ -636,9 +636,9 @@
     <!--app-->
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
     <script src="{{ asset('backend') }}/assets/js/index.js"></script>
-    <script>
-        new PerfectScrollbar(".best-product")
-    </script>
+    {{-- <script>
+        // new PerfectScrollbar(".best-product")
+    </script> --}}
     {{-- select js  --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Summernote JS - CDN Link -->

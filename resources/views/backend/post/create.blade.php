@@ -126,7 +126,8 @@
                                     <textarea class="form-control" rows="50"name="post_description" id="editor1">{{ old('post_description') }}</textarea>
                                     @error('post_description')
                                         <p class="text-danger">{{ $message }}</p>
-                                    @enderror
+      
+                                        @enderror
 
                                 </div>
                                 <div class="mb-2 col-12">

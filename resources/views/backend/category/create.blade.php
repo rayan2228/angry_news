@@ -60,7 +60,7 @@
                                 <div class="col-12">
                                     <label class="form-label">Category Image</label>
                                     <input type="file" class="form-control" name="category_image">
-                                    @error('category_slug')
+                                    @error('category_image')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -212,9 +212,10 @@
                                                             method="post" id="delete">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit"
-                                                                class="text-danger" style="background: none; border:none;" data-bs-toggle="tooltip"
-                                                                data-bs-original-title="Delete" aria-label="Delete"><i
+                                                            <button type="submit" class="text-danger"
+                                                                style="background: none; border:none;"
+                                                                data-bs-toggle="tooltip" data-bs-original-title="Delete"
+                                                                aria-label="Delete"><i
                                                                     class="bi bi-trash-fill"></i></button>
                                                         </form>
                                                     </div>

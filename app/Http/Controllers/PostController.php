@@ -211,7 +211,7 @@ class PostController extends Controller
                 }
             }
             # modified entity ready to store in database
-            $post_description = $dom->saveHTML($dom->documentElement);
+            $post_description = $dom->saveHTML();
             $post->update([
                 "post_description" => null,
             ]);
