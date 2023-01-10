@@ -7,8 +7,11 @@ use App\Models\Post;
 use App\Models\SubCategory;
 use App\Models\Tags;
 use Carbon\Carbon;
+use File;
+use Illuminate\Http\File as HttpFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -65,7 +68,7 @@ class PostController extends Controller
 
         $request->validate([
             "post_heading" => "required",
-            "post_slug" => "unique:posts,post_slug",
+            "post_slug" => "min:5|unique:posts,post_slug",
             "post_description" => "required",
             "post_thumbnail" => "required | mimes:png,jpg",
         ]);
@@ -74,11 +77,12 @@ class PostController extends Controller
         }
         if ($request->post_slug) {
             $salt = "_" . rand(1, 10);
-            $slug = Str::slug($request->post_slug .= $salt, "_");
+            $slug_salt = $request->post_slug . $salt;
+            $slug = Str::slug($slug_salt, "_");
         } else {
             $slug = Str::slug($request->post_heading, "_");
         }
-        $post_thumbnail_name = Str::limit($slug, 10) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('post_thumbnail')->getClientOriginalExtension();
+        $post_thumbnail_name = Str::limit($slug, 5) . '_' . Auth::guard('admin')->id() . '_' . time() . '_' . Carbon::now()->format('Y') . '.' . $request->file('post_thumbnail')->getClientOriginalExtension();
         Image::make($request->file('post_thumbnail'))->save(base_path('public/uploads/post_thumbnail/' . $post_thumbnail_name), 80);
 
         // summernote
@@ -97,7 +101,8 @@ class PostController extends Controller
                     $mimetype = $groups['mime'];
                     # Generating a random filename
                     $filename =
-                        Str::limit($slug, 5) . '_' . Auth::guard('admin')->id() . '_' . time() . rand(10,1000) . '_' . Carbon::now()->format('Y');
+                        Str::limit($slug, 5) . '_' . Auth::guard('admin')->id() . '_' . time() .
+                        Str::random(8) . '_' . Carbon::now()->format('Y');
                     $filepath = "uploads/post_thumbnail/$filename.$mimetype";
                     $image = Image::make($src)
                         ->encode($mimetype, 100)
@@ -145,7 +150,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('backend.post.show',compact('post'));
+        return view('backend.post.show', compact('post'));
     }
 
     /**
@@ -172,8 +177,8 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            "post_heading" => "required",
-            "post_slug" => "required | unique:posts,post_slug," . $post->id,
+            "post_heading" => "required ",
+            "post_slug" => "required | min:5 |unique:posts,post_slug," . $post->id,
             "post_description" => "required",
             "post_thumbnail" => " mimes:png,jpg",
         ]);
@@ -195,18 +200,41 @@ class PostController extends Controller
         if ($old_post_description !== $post_description) {
             libxml_use_internal_errors(true);
             $dom = new \DomDocument();
-            $dom->loadHtml('<?xml encoding="utf-8" ?>' . $old_post_description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    // must include this to avoid font problem
+            $dom->loadHtml('<?xml encoding="utf-8" ?>' . $post_description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    // must include this to avoid font problem
             $images = $dom->getElementsByTagName('img');
             if (count($images) > 0) {
                 foreach ($images as  $img) {
                     $src = $img->getAttribute('src');
-                    $filename = last(explode("/", $src));
-                    unlink(base_path('public/uploads/post_thumbnail/' . $filename));
-                    $img->removeAttribute('src');
+                    if (!preg_match('/data:image/', $src)) {
+                        $filename = last(explode("/", $src));
+                        $oldfile = "uploads/post_thumbnail/$filename";
+                        $mimetype = last(explode(".", $src));
+                        $newFilename =
+                            Str::limit($slug, 5) . '_' . Auth::guard('admin')->id() . '_' . time() .
+                            Str::random(8) . '_' . Carbon::now()->format('Y');
+                        $filepath = "uploads/post_thumbnail/$newFilename.$mimetype";
+                        copy($oldfile, $filepath);
+                        unlink(base_path("public/" . $oldfile));
+                        $new_src = asset($filepath);
+                        $img->removeAttribute('src');
+                        $img->setAttribute('src', $new_src);
+                    }
                     # if the img source is 'data-url'
                     if (preg_match('/data:image/', $src)) {
-                        unlink(base_path('public/uploads/post_thumbnail/' . $filename));
+                        # get the mimetype
+                        preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                        $mimetype = $groups['mime'];
+                        # Generating a random filename
+                        $filename =
+                            Str::limit($slug, 5) . '_' . Auth::guard('admin')->id() . '_' . time() .
+                            Str::random(8) . '_' . Carbon::now()->format('Y');
+                        $filepath = "uploads/post_thumbnail/$filename.$mimetype";
+                        $image = Image::make($src)
+                            ->encode($mimetype, 100)
+                            ->save(public_path($filepath), 80);
+                        $new_src = asset($filepath);
                         $img->removeAttribute('src');
+                        $img->setAttribute('src', $new_src);
                     }
                 }
             }
@@ -216,7 +244,7 @@ class PostController extends Controller
                 "post_description" => null,
             ]);
             $post->update([
-                "post_description" => $request->post_description,
+                "post_description" => $post_description,
             ]);
         }
         // normal data update
@@ -253,16 +281,16 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return back()->with('delete','post in trash');
+        return back()->with('delete', 'post in trash');
     }
     public function restore($post)
     {
-        Post::onlyTrashed()->find($post)->restore(); 
-        return back()->with('restore','post restored');
+        Post::onlyTrashed()->find($post)->restore();
+        return back()->with('restore', 'post restored');
     }
     public function trash($post)
     {
-        $post_data= Post::onlyTrashed()->find($post);
+        $post_data = Post::onlyTrashed()->find($post);
         unlink(base_path('public/uploads/post_thumbnail/' . $post_data->post_thumbnail));
         $post_description = $post_data->post_description;
         libxml_use_internal_errors(true);
@@ -283,6 +311,6 @@ class PostController extends Controller
         $post_data->relationSubCategories()->detach();
         $post_data->relationTags()->detach();
         $post_data->forceDelete();
-        return back()->with('delete','post deleted');
+        return back()->with('delete', 'post deleted');
     }
 }

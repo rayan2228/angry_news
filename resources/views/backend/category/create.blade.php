@@ -175,7 +175,6 @@
                                         <tr>
                                             <th>Serial</th>
                                             <th>Name</th>
-                                            <th>Description</th>
                                             <th>Slug</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -187,9 +186,6 @@
 
                                                 <td>{{ $categories->firstItem() + $loop->index }}</td>
                                                 <td>{{ $category->category_name }}</td>
-                                                <td>
-                                                    <p>{{ $category->category_description }}</p>
-                                                </td>
                                                 <td>{{ $category->category_slug }}</td>
                                                 <td>
                                                     @if ($category->category_status === 'active')
@@ -231,9 +227,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <nav class="mt-0 float-end" aria-label="Page navigation">
-                                {{ $categories->withQueryString()->links() }}
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -320,7 +313,6 @@
                                             <th>Serial</th>
                                             <th>Name</th>
                                             <th>Parent Category Name</th>
-                                            <th>Description</th>
                                             <th>Slug</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -332,7 +324,6 @@
                                                 <td>{{ $subCategories->firstItem() + $loop->index }}</td>
                                                 <td>{{ $subCategory->subCategory_name }}</td>
                                                 <td>{{ $subCategory->relationCategory->category_name }}</td>
-                                                <td>{{ $subCategory->subCategory_description }}</td>
                                                 <td>{{ $subCategory->subCategory_slug }}</td>
                                                 <td>
                                                     @if ($subCategory->subCategory_status === 'active')
@@ -386,6 +377,9 @@
             <!--end row-->
         </div>
     </div>
+    <nav class="mt-0 float-end" aria-label="Page navigation">
+        {{ $categories->withQueryString()->links() }}
+    </nav>
 
     @section('footer_script')
         @if (session('success'))

@@ -41,6 +41,7 @@ class CommentsController extends Controller
         // Comment::insert([
         //     'post_slug' => 
         // ]);
+        return $request;
     }
 
     /**

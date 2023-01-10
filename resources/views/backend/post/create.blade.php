@@ -123,10 +123,10 @@
                                 </div>
                                 <div class="mb-2 col-12">
                                     <label class="form-label">Post Description</label>
-                                    <textarea class="form-control" rows="50"name="post_description" id="editor1">{{ old('post_description') }}</textarea>
+                                    <textarea class="form-control" rows="50"name="post_description" id="summernote">{{ old('post_description') }}</textarea>
                                     @error('post_description')
                                         <p class="text-danger">{{ $message }}</p>
-      
+
                                         @enderror
 
                                 </div>
@@ -232,7 +232,7 @@
             });
         </script>
     @endif
-    <script src="https://cdn.tiny.cloud/1/tdsho3csnxwtvih34teop0xfxe57rigbkn7odeqi4yoeyhsl/tinymce/6/tinymce.min.js"
+    {{-- <script src="https://cdn.tiny.cloud/1/tdsho3csnxwtvih34teop0xfxe57rigbkn7odeqi4yoeyhsl/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script>
         tinymce.init({
@@ -242,6 +242,6 @@
             images_upload_url: 'rayan',
             automatic_uploads: false
         });
-    </script>
+    </script> --}}
 @endsection
 @endsection

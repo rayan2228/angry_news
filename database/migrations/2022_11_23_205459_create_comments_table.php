@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('post_slug');
+            $table->integer('post_id');
             $table->integer('user_id');
             $table->integer('parent_id')->nullable();
-            $table->longText('comment')->nullable();
-            $table->string('comment_status')->nullable();
+            $table->longText('comment');
+            $table->string('comment_status')->default('active');
             $table->timestamps();
         });
     }

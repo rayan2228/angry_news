@@ -20,11 +20,9 @@ class Post extends Model
     {
         return $this->belongsToMany(SubCategory::class , 'subcategory_post', 'post_id', 'subcategory_id')->withTimestamps();
     }
-    // tags 
+    // tags
     public function relationTags()
     {
         return $this->belongsToMany(Tags::class , 'tags_post', 'post_id', 'tag_id')->withTimestamps();
     }
-    
-    
 }
